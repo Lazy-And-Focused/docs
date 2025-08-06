@@ -1,7 +1,13 @@
-import type { NextConfig } from "next";
+import nextra from "nextra";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+// Set up Nextra with its configuration
+const withNextra = nextra({});
 
-export default nextConfig;
+// Export the final Next.js config with Nextra included
+export default withNextra({
+  turbopack: {
+    resolveAlias: {
+      "next-mdx-import-source-file": "./mdx-components.ts",
+    },
+  },
+});
