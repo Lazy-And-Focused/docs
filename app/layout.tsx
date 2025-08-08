@@ -30,6 +30,7 @@ export default async function RootLayout({
           navbar={navbar}
           pageMap={await getPageMap()}
           footer={footer}
+          docsRepositoryBase="https://github.com/Lazy-And-Focused/docs/tree/main"
         >
           {children}
         </Layout>
