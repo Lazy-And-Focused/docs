@@ -12,11 +12,13 @@ Frontend-части проекта LAFka.
 
 <!-- prettier-ignore -->
 > [!CAUTION]
+>
 > Эта страница проектируется, пишется и обсуждается. Если есть предложения, то
 > не стесняйтксь писать в issue или в чат Telegram.
 
 <!-- prettier-ignore -->
 > [!CAUTION]
+>
 > Возможно пригодится дополнительный материал, такой как
 > документация по
 > [Feature-Sliced Design (FSD)](https://feature-sliced.github.io/documentation/ru/docs/get-started/overview).
@@ -35,6 +37,7 @@ Frontend-части проекта LAFka.
 
 <!-- prettier-ignore -->
 > [!NOTE]
+>
 > Этот раздел также можно обозвать "Понятия", намекая
 > [на оригинальный](https://feature-sliced.github.io/documentation/ru/docs/get-started/overview#concepts).
 
