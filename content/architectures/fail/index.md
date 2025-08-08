@@ -10,7 +10,7 @@ sidebarTitle: Об архитектуре
 для [Lafka](https://github.com/Lazy-And-Focused/lafka).
 
 На самом деле была вдохновлена
-[FSD (Feature-Sliced Design)](https://feature-sliced.design/) и 
+[FSD (Feature-Sliced Design)](https://feature-sliced.design/) и
 доработана под реалии Next.js и задач команды.
 
 ## Содержание
@@ -21,7 +21,6 @@ sidebarTitle: Об архитектуре
 > Документация в разработке.
 
 - Архитектура проекта
-
   - [Введение](/architectures/fail/introduction.md)
 
     > Архитектура проекта: от идеи до реализации

@@ -22,11 +22,15 @@ sidebarTitle: Паттерны
 ```tsx
 // home/layout.tsx
 export default function HomeLayout({ children }) {
-    return children;
+  return children;
 }
 // home/page.tsx
-export default function HomePage() { return null }
+export default function HomePage() {
+  return null;
+}
 
 // user/page.tsx
-export default function UserPage() { return null }
+export default function UserPage() {
+  return null;
+}
 ```

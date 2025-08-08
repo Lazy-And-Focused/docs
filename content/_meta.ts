@@ -1,4 +1,4 @@
 export default {
-  agreements: 'Соглашения',
-  architectures: 'Архитектуры',
-}
+  agreements: "Соглашения",
+  architectures: "Архитектуры",
+};
