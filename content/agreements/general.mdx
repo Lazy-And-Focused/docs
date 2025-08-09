@@ -144,10 +144,36 @@ sidebarTitle: Главное
   Но только тогда и только тогда, когда переменная понятна из контекста и код не выглядит большим и громовским.  
 
 - 3.2. “Каждая линия функции должна быть на одинаковом уровне абстракции” — Каждая часть функции должна, как и функция, выполнять работу над действием функции.
-- 6.5. “Использовать пояснительные переменные” — Объявлять переменные, когда записываешь условие или результат функции.  
-  ![][image2]
+- 6.5. “Использовать пояснительные переменные” — Объявлять переменные, когда записываешь условие или результат функции.
+
+  ```js
+  const transferAllowed = hasSufficientBalance(account.balance, transfer.amount) 
+    && account.isActive();
+
+  if (transferAllowed) {
+    console.log("Transfer successful.");
+  } else {
+    throw new Error("Transfer can not be completed.");
+  }
+  ```
+
 - 6.9. “Желательно не опускать фигурные скобки” — см. снимок экрана.  
-  ![][image3]  
+
+  ```js
+  // Без опускания фигурных скобок
+  if (transferAllowed) {
+    console.log("Transfer successful.");
+  } else {
+    throw new Error("Transfer can not be completed.");
+  }
+
+  // С опусканием фигурных скобок
+  if (transferAllowed)
+    console.log("Transfer successful.");
+  else
+    throw new Error("Transfer can not be completed.");
+  ```
+
   При этом допускается опускание скобок, если сразу после идёт возврат функции или вброс ошибки (заканчивание логики).
 
 ## Источники вдохновения [#inspirations]
