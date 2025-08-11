@@ -3,6 +3,8 @@ title: Введение в архитектуру FAiL
 sidebarTitle: Введение
 ---
 
+import { FileTree } from 'nextra/components'
+
 # Введение в архитектуру
 
 Страница содержит информацию о применяемой архитектуре в пределах
@@ -10,13 +12,13 @@ Frontend-части проекта LAFka.
 
 ## Идея и концепция
 
-<!-- prettier-ignore -->
+{/* prettier-ignore */}
 > [!CAUTION]
 >
 > Эта страница проектируется, пишется и обсуждается. Если есть предложения, то
 > не стесняйтксь писать в issue или в чат Telegram.
 
-<!-- prettier-ignore -->
+{/* prettier-ignore */}
 > [!CAUTION]
 >
 > Возможно пригодится дополнительный материал, такой как
@@ -35,7 +37,7 @@ Frontend-части проекта LAFka.
 
 ## Проект | Термины
 
-<!-- prettier-ignore -->
+{/* prettier-ignore */}
 > [!NOTE]
 >
 > Этот раздел также можно обозвать "Понятия", намекая
@@ -56,31 +58,27 @@ Frontend-части проекта LAFka.
    >
    > \*Состоит из сегментов напрямую.
 
-2. _~~Processes~~ (процессы, **устаревший**)_
+2. **Pages** _(страницы)_
 
-   > Сложные межстраничные сценарии.
+    > Большие части страницы.
 
-3. **Pages** _(страницы)_
-
-   > Полные страницы или большие части страницы при вложенном
-   > роутинге.
-
-4. **Widgets** _(виджеты)_
+3. **Widgets** _(виджеты)_
 
    > Большие самодостаточные куски функциональности или интерфейса,
    > обычно реализующие целый пользовательский сценарий.
 
-5. **Features** _(фичи)_
+4. **Features** _(фичи)_
 
    > Повторно используемые реализации целых фич продукта, то есть
    > действий, приносящих бизнес-ценность пользователю.
 
-6. **Entities** _(сущности)_
+5. **Entities** _(сущности)_
 
    > Бизнес-сущности, с которыми работает проект, например user или
    > product.
 
-7. **Shared**
+6. **Shared**
+
    > Переиспользуемый код, особенно когда он отделён от специфики
    > проекта/бизнеса, хотя это не обязательно.
    >
@@ -113,6 +111,46 @@ Frontend-части проекта LAFka.
 
 ## Проект | Организация
 
+### Структура _(общее представление)_
+
+Для `~/src/` _(изначальная)_:
+
+<FileTree className="w-full">
+  <FileTree.Folder name="node_modules">
+    Папка с модулями от Node.js
+  </FileTree.Folder>
+
+  <FileTree.Folder name=".next | dist | build">
+    Папка со сборкой проекта (системная)
+  </FileTree.Folder>
+
+  <FileTree.Folder name="src" defaultOpen>
+    <FileTree.Folder name="app" defaultOpen>
+      <FileTree.Folder name="(home)">
+        <FileTree.File name="page.tsx" />
+        <span>
+          Файл <code>page.tsx</code> был вынесен из
+           <code>~/src/app/page.tsx</code>
+        </span>
+      </FileTree.Folder>
+
+      <FileTree.File name="globals.css" />
+      <FileTree.File name="layout.tsx" />
+    </FileTree.Folder>
+
+    <FileTree.Folder name="pages" />
+    <FileTree.Folder name="features" />
+    <FileTree.Folder name="widgets" />
+    <FileTree.Folder name="entities" />
+    <FileTree.Folder name="shared" />
+  </FileTree.Folder>
+
+  <FileTree.File name="package.json" />
+  <FileTree.File name=".gitignore" />
+  <FileTree.File name="LICENSE" />
+  <FileTree.File name="README.md" />
+</FileTree>
+
 ### Основные каталоги
 
 Прежде чем читать дальше, стоит сделать передышку и акцентрировать
@@ -122,8 +160,7 @@ Frontend-части проекта LAFka.
 
 - `docs`
 
-  > Директория с документацией. Кстати, Вы сейчас в ней
-  > (`~/docs/architecture/index.md`).
+  > Директория с документацией.
 
 - `public`
 
@@ -220,7 +257,7 @@ Frontend-части проекта LAFka.
 
   > Конфигурация для страницы и её компонентов.
 
-<!-- prettier-ignore -->
+{/* prettier-ignore */}
 > [!NOTE]
 >
 > Префикс `_` в Next.js App Router подсказывает компилятору
@@ -231,12 +268,19 @@ Frontend-части проекта LAFka.
 ## Нейминг файлов
 
 Для именования файлов использутеся `kebab-case`, но есть случаи, при
-которых используется `PascalCase` (но вообще не рекомендуется):
+которых используется `PascalCase` _(но вообще **не** рекомендуется)_:
 
 1. Файл назван "в честь" константы или объекта, который он
-   экспортирует (обычно по умолчанию).
+   экспортирует.
 
    > Это правило распространяется только на конфигурационные файлы,
    > либо тесно связанные с ними.
+
+
+   > Пример _(упрощённый)_:
+   > ```ts
+   > // button.tsx
+   > export default function Button() { return null }
+   > ```
 
 2. На этом пока что всё.
