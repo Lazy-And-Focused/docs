@@ -10,7 +10,7 @@ import { FileTree } from 'nextra/components'
 Страница содержит информацию о применяемой архитектуре в пределах
 Frontend-части проекта LAFka.
 
-## Идея и концепция
+## Идея и концепция [#ideas-and-concepts]
 
 {/* prettier-ignore */}
 > [!CAUTION]
@@ -35,7 +35,7 @@ Frontend-части проекта LAFka.
 Да-да, мы используем не изначальную метологию, а модифицированную. В
 дальнейшем обзовём её Frontend Architecture in Lafka (FAiL).
 
-## Проект | Термины
+## Проект | Термины [#terminology]
 
 {/* prettier-ignore */}
 > [!NOTE]
@@ -43,7 +43,7 @@ Frontend-части проекта LAFka.
 > Этот раздел также можно обозвать "Понятия", намекая
 > [на оригинальный](https://feature-sliced.github.io/documentation/ru/docs/get-started/overview#concepts).
 
-### Слои
+### Слои [#layers]
 
 Слой – каталог в проекте, внутри которого дополнительно вложены
 слайсы, а в них уже и сегменты (_читай дальше_). Слои
@@ -88,7 +88,7 @@ Frontend-части проекта LAFka.
 модулях со слоев строго ниже, и как следствие, импортировать только с
 них.
 
-### Слайсы
+### Слайсы [#slices]
 
 Дальше по глубине идут слайсы. Они делят слой по предметной области,
 то есть группируют тесно связанный по смыслу код. Это помогает не
@@ -100,7 +100,7 @@ Frontend-части проекта LAFka.
 при этом сильную связанность кода внутри него (слайса) и слабую
 сцеплённость между слайсами.
 
-### Сегменты
+### Сегменты [#segments]
 
 Слайсы (плюс слои App, Shared) состоят из сегментов, а сегменты
 группируют код по его назначению. Имена сегментов не зафиксированы
@@ -109,9 +109,9 @@ Frontend-части проекта LAFka.
 для наиболее распространенных целей. Мы рассмотрим детальнее
 используемые в нашей спецификации (FAiL) имена в будущем.
 
-## Проект | Организация
+## Проект | Организация [#project-structure]
 
-### Структура _(общее представление)_
+### Структура _(общее представление)_ [#global-structure]
 
 Для `~/src/` _(изначальная)_:
 
@@ -124,14 +124,16 @@ Frontend-части проекта LAFka.
     Папка со сборкой проекта (системная)
   </FileTree.Folder>
 
+  <FileTree.Folder name="public" />
+
   <FileTree.Folder name="src" defaultOpen>
     <FileTree.Folder name="app" defaultOpen>
       <FileTree.Folder name="(home)">
-        <FileTree.File name="page.tsx" />
         <span>
           Файл <code>page.tsx</code> был вынесен из
            <code>~/src/app/page.tsx</code>
         </span>
+        <FileTree.File name="page.tsx" />
       </FileTree.Folder>
 
       <FileTree.File name="globals.css" />
@@ -140,7 +142,9 @@ Frontend-части проекта LAFka.
 
     <FileTree.Folder name="pages" />
     <FileTree.Folder name="features" />
-    <FileTree.Folder name="widgets" />
+    <FileTree.Folder name="widgets" defaultOpen>
+      <FileTree.Folder name="ui" />
+    </FileTree.Folder>
     <FileTree.Folder name="entities" />
     <FileTree.Folder name="shared" />
   </FileTree.Folder>
@@ -151,7 +155,7 @@ Frontend-части проекта LAFka.
   <FileTree.File name="README.md" />
 </FileTree>
 
-### Основные каталоги
+### Основные каталоги [#catalogs]
 
 Прежде чем читать дальше, стоит сделать передышку и акцентрировать
 внимание на главную (рутовую) область в проекте (`~`).
@@ -179,7 +183,7 @@ Frontend-части проекта LAFka.
   > Первая папка содержит билд проекта, вторая зависимости ("Да
   > ладно!"). Они **обязаны** быть включены в `.gitignore` файл.
 
-### Next.js | Source Folder
+### Next.js | Source Folder [#nextjs-src]
 
 Структура
 ([архитектура](https://nextjs.org/docs/app/getting-started/project-structure))
@@ -199,7 +203,7 @@ Frontend-части проекта LAFka.
 
   > Сюда обычно входят такие файлы, как `middleware.ts` и `auth.ts`.
 
-### Next.js | Роутинг
+### Next.js | Роутинг [#nextjs-routing]
 
 Вам уже известно, как работает
 [App Router](https://nextjs.org/docs/app) в Next.js. Если нет, то
@@ -225,7 +229,7 @@ Frontend-части проекта LAFka.
   > Обратите внимание, что большие и/или часто переиспользуемые
   > компоненты стоит выносить в такие папки, как `widgets`.
 
-### Next.js | Вложенность
+### Next.js | Вложенность [#nextjs-deep]
 
 Я не придумал, как ещё обозвать этот раздел, кроме как "вложенность"
 или "дочерние папки страницы". Хорошо, он будет о том, как Вы
@@ -265,7 +269,7 @@ Frontend-части проекта LAFka.
 > словами, код внутри ни в коем случае не будет рассматриваться, как
 > страница, даже если файл будет называться `page.tsx`.
 
-## Нейминг файлов
+## Нейминг файлов [#files-naming]
 
 Для именования файлов использутеся `kebab-case`, но есть случаи, при
 которых используется `PascalCase` _(но вообще **не** рекомендуется)_:
