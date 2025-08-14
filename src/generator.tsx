@@ -3,8 +3,11 @@ import React from "react";
 import { Resolver } from "./resolver";
 import { InputSchema } from "./schema";
 
+import style from "./style.module.css";
+
 export class Generator {
   public readonly schemas: InputSchema[];
+  private count = 0;
 
   public constructor(
     public readonly file: string
@@ -13,21 +16,31 @@ export class Generator {
   }
 
   public execute() {
-    return this.schemas.map(schema => this.toReactComponent(schema))
+    return (
+      <div>
+        {
+          this.schemas.flatMap(schema => this.toReactComponent(schema))
+        }
+      </div>
+    )
   }
 
   private fileToReactComponent(file: InputSchema[string]) {
+    this.count++;
+
     if (file.type === "folder") {
       return (
-        <div>
+        <div key={this.count} className={style.folder}>
           <span>{file.name}</span>
-          {
-            this.toReactComponent(file.content)
-          }
+          <div>
+            {
+              this.toReactComponent(file.content)
+            }
+          </div>
         </div>
       );
     } else {
-      return <span>{file.name}</span>
+      return <span key={this.count} className={style.file}>{file.name}</span>
     }
   }
 
@@ -35,23 +48,3 @@ export class Generator {
     return Object.keys(schema).map(key => this.fileToReactComponent(schema[key]));
   }
 }
-
-console.log(new Generator(`
-\`\`\`lafistory
-{
-  "test.ts": {
-    "name": "test.ts",
-    "type": "file"
-  }
-}
-\`\`\`
-
-\`\`\`lafistory
-{
-  "test1.ts": {
-    "name": "test1.ts",
-    "type": "file"
-  }
-}
-\`\`\`  
-`).execute())

@@ -75,23 +75,3 @@ export class Resolver {
     }).filter(schema => schema !== null);
   }
 }
-
-console.log(new Resolver(`
-\`\`\`lafistory
-{
-  "test": {
-    "name": "test",
-    "type": "file"
-  }
-}
-\`\`\`
-
-\`\`\`lafistory
-{
-  "test23": {
-    "name": "test23",
-    "type": "file"
-  }
-}
-\`\`\`  
-`).execute())
