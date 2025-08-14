@@ -17,7 +17,7 @@ export class Generator {
 
   public execute() {
     return (
-      <div>
+      <div className={style.main}>
         {
           this.schemas.flatMap(schema => this.toReactComponent(schema))
         }
@@ -40,7 +40,16 @@ export class Generator {
         </div>
       );
     } else {
-      return <span key={this.count} className={style.file}>{file.name}</span>
+      return (
+        <div key={this.count} className={style.file}>
+          <span className={style.name}>{file.name}</span>
+          {
+            file.description
+              ? <span className={style.description}>{file.description}</span>
+              : <></>
+          }
+        </div>
+      )
     }
   }
 

@@ -1,5 +1,6 @@
 export type File = {
-  name: string
+  name: string,
+  description?: string
 } & ({
   type: "file",
 } | {

@@ -25,7 +25,8 @@ export const TEST_FILE = `
         "content": {
           "index.ts": {
             "name": "index.ts",
-            "type": "file"
+            "type": "file",
+            "description": "index file of program"
           },
 
           "index.test.ts": {

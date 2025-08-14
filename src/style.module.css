@@ -1,11 +1,26 @@
+.main {
+  max-width: max-content;
+}
+
 .folder {
   display: flex;
   flex-direction: column;
 }
 
 .folder div {
-  display: flex;
-  flex-direction: column;
-  
   margin: 0 0 0 10px;
+}
+
+.file {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.description {
+  display: none;
+}
+
+.file:hover .description {
+  display: block;
 }

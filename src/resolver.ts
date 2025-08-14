@@ -37,9 +37,14 @@ export class Resolver {
     const output: InputSchema = {};
 
     for (const key in schema) {
-      const { type, name } = schema[key];
+      const { type, name, description } = schema[key];
       if (!Resolver.INCLUDED_FILE_TYPES.includes(type)) {
         console.error("File type error, file type " + type + " is not exists");
+        continue;
+      }
+
+      if (typeof description !== "string" && typeof description !== "undefined") {
+        console.error("descrption is not a string");
         continue;
       }
 
