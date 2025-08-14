@@ -1,7 +1,7 @@
 import { Schema } from "./schema";
 
 export class Resolver {
-  public static readonly REG_EXP = /(?:\`\`\`lafistory\s+([^`]*)\s+\`\`\`)*/g;
+  public static readonly REG_EXP = /```lafistory\s+((?:(?!```).)+)```/gs;
   public static readonly LOCAL_REG_EXP = /(?:\`\`\`lafistory\s+([\w\W]*)\s+\`\`\`)*/;
   public static readonly INCLUDED_FILE_TYPES = ["file", "folder"];
 
