@@ -2,39 +2,22 @@ export const TEST_FILE = `
 \`\`\`lafistory
 {
   "test.ts": {
-    "name": "test.ts",
-    "type": "file"
+    "file": "some description",
+    "src": {
+        "index.ts": "index.ts"
+    }
   }
 }
 \`\`\`
 
+# Архитектура
+
 \`\`\`lafistory
 {
-  "some-folder": {
-    "name": "some-folder",
-    "type": "folder",
-    "content": {
-      ".json": {
-        "name": ".json",
-        "type": "file"
-      },
-
-      "some-folder2": {
-        "name": "some-folder2",
-        "type": "folder",
-        "content": {
-          "index.ts": {
-            "name": "index.ts",
-            "type": "file",
-            "description": "index file of program"
-          },
-
-          "index.test.ts": {
-            "name": "index.test.ts",
-            "type": "file"
-          }
-        }
-      }
+  "test.ts": {
+    "file": "file",
+    "src": {
+        "index.ts": "index.ts"
     }
   }
 }

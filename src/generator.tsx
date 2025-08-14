@@ -1,12 +1,12 @@
 import React from "react";
 
 import { Resolver } from "./resolver";
-import { InputSchema } from "./schema";
+import { Schema } from "./schema";
 
 import style from "./style.module.css";
 
 export class Generator {
-  public readonly schemas: InputSchema[];
+  public readonly schemas: Schema[];
   private count = 0;
 
   public constructor(
@@ -25,16 +25,16 @@ export class Generator {
     )
   }
 
-  private fileToReactComponent(file: InputSchema[string]) {
+  private fileToReactComponent(file: { name: string, data: Schema[string] }) {
     this.count++;
 
-    if (file.type === "folder") {
+    if (typeof file.data !== "string") {
       return (
         <div key={this.count} className={style.folder}>
           <span>{file.name}</span>
           <div>
             {
-              this.toReactComponent(file.content)
+              this.toReactComponent(file.data)
             }
           </div>
         </div>
@@ -44,8 +44,8 @@ export class Generator {
         <div key={this.count} className={style.file}>
           <span className={style.name}>{file.name}</span>
           {
-            file.description
-              ? <span className={style.description}>{file.description}</span>
+            (file.name !== file.data) && file.data !== ""
+              ? <span className={style.description}>{file.data}</span>
               : <></>
           }
         </div>
@@ -53,7 +53,7 @@ export class Generator {
     }
   }
 
-  private toReactComponent(schema: InputSchema) {
-    return Object.keys(schema).map(key => this.fileToReactComponent(schema[key]));
+  private toReactComponent(schema: Schema) {
+    return Object.keys(schema).map(key => this.fileToReactComponent({ name: key, data: schema[key] }));
   }
 }

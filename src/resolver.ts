@@ -1,4 +1,4 @@
-import { InputSchema } from "./schema";
+import { Schema } from "./schema";
 
 export class Resolver {
   public static readonly REG_EXP = /(?:\`\`\`lafistory\s+([^`]*)\s+\`\`\`)*/g;
@@ -33,34 +33,21 @@ export class Resolver {
       .filter(v => v != null);
   }
 
-  private validateSchema(schema: InputSchema) {
-    const output: InputSchema = {};
+  private validateSchema(schema: Schema) {
+    const output: Schema = {};
 
     for (const key in schema) {
-      const { type, name, description } = schema[key];
-      if (!Resolver.INCLUDED_FILE_TYPES.includes(type)) {
-        console.error("File type error, file type " + type + " is not exists");
+      const value = schema[key];
+
+      const valueValided = (typeof value === "object" && !Array.isArray(value)) || typeof value === "string";
+      if (!valueValided) {
         continue;
       }
 
-      if (typeof description !== "string" && typeof description !== "undefined") {
-        console.error("descrption is not a string");
-        continue;
-      }
-
-      if (typeof name !== "string") {
-        console.error("name is not a string");
-        continue;
-      }
-
-      if (type === "file") {
-        output[key] = schema[key];
-        continue;
+      if (typeof value !== "string") {
+        output[key] = this.validateSchema(value);
       } else {
-        output[key] = {
-          name, type,
-          content: this.validateSchema(schema[key].content)
-        };
+        output[key] = value;
       }
     }
 
@@ -70,7 +57,7 @@ export class Resolver {
   private toJson() {
     return this.validateFile().map(lafistory => {
       try {
-        const schema: InputSchema = JSON.parse(lafistory);
+        const schema: Schema = JSON.parse(lafistory);
 
         return this.validateSchema(schema);
       } catch (error) {
