@@ -16,9 +16,9 @@ export const TEST_FILE = `
 {
   "test.ts": {
     "file": "file",
-    "src": {
+    "src": ["some-description", {
         "index.ts": "index.ts"
-    }
+    }]
   }
 }
 \`\`\``;

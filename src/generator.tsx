@@ -31,12 +31,18 @@ export class Generator {
     if (typeof file.data !== "string") {
       return (
         <div key={this.count} className={style.folder}>
-          <span>{file.name}</span>
-          <div>
-            {
-              this.toReactComponent(file.data)
-            }
-          </div>
+          <span className={style.name}>{file.name}</span>
+          
+          {
+            Array.isArray(file.data)
+              ? (
+                <>
+                  <span className={style.description}>{file.data[0]}</span>
+                  <div>{this.toReactComponent(file.data[1])}</div>
+                </>
+              )
+              : <div>{this.toReactComponent(file.data)}</div>
+          }
         </div>
       );
     } else {

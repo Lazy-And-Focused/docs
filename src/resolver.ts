@@ -39,13 +39,15 @@ export class Resolver {
     for (const key in schema) {
       const value = schema[key];
 
-      const valueValided = (typeof value === "object" && !Array.isArray(value)) || typeof value === "string";
+      const valueValided = typeof value === "object" || typeof value === "string";
       if (!valueValided) {
         continue;
       }
 
       if (typeof value !== "string") {
-        output[key] = this.validateSchema(value);
+        output[key] = Array.isArray(value)
+          ? [value[0], this.validateSchema(value[1])]
+          : this.validateSchema(value);
       } else {
         output[key] = value;
       }

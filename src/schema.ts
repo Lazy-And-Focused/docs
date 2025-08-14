@@ -1,3 +1,3 @@
 export type Schema = {
-  [name: string]: string|Schema
+  [name: string]: string|Schema|[string, Schema]
 };

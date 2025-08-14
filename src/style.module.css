@@ -21,6 +21,10 @@
   display: none;
 }
 
+.folder:hover :nth-child(2) {
+  display: block;
+}
+
 .file:hover .description {
   display: block;
 }
