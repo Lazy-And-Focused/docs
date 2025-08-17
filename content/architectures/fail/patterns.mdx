@@ -15,6 +15,14 @@ sidebarTitle: Паттерны
 Раздел посвящён неймингу и паттернам, которые Вы должны соблюдать в
 рамках кода для Frontend-части приложения.
 
+## Нейминг файлов [#files-naming]
+
+Для именования файлов используется `kebab-case`:
+
+- `example-page/page.tsx`
+- `form-login.tsx`
+- `users-config.ts`
+
 ## Next.js | Layouts & Pages
 
 Функциональные компоненты, экспортируемые по умолчанию, должны иметь
@@ -22,16 +30,21 @@ sidebarTitle: Паттерны
 
 ```tsx
 // home/layout.tsx
-export default function HomeLayout({ children }) {
+type LayoutProps = {
+  children: React.ReactNode;
+};
+
+export default function HomeLayout({ children }: LayoutProps) {
   return children;
 }
+
 // home/page.tsx
 export default function HomePage() {
-  return null;
+  return <></>;
 }
 
 // user/page.tsx
 export default function UserPage() {
-  return null;
+  return <></>;
 }
 ```
