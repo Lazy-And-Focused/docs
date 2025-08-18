@@ -86,11 +86,14 @@ sidebarTitle: Главное
 4. Всегда выносить импорт типов.
 5. Избегать `require`.
 6. Избегать `import * as {name}`.
-7. <span id="import-and-export-7" /> Обязательно сортировать импорты. - Также
-   импортировать сначала типы (типы, интерфейсы, абстракные классы) - После
-   данные (функции, переменные, классы) - А в конце вспомогательные файлы (.txt,
-   .json, .css) и импорты-инициализаторы (за редким исключением). [Ничего не
-   понял, но очень интересно](#exp-6_7)
+7. <span id="import-and-export-7"></span> Обязательно сортировать импорты.
+
+- Также импортировать сначала типы (типы, интерфейсы, абстракные классы)
+- После данные (функции, переменные, классы)
+- А в конце вспомогательные файлы (`.txt`, `.json`, `.css`) и
+  импорты-инициализаторы (за редким исключением).
+  [Ничего не понял, но очень интересно](#exp-6_7)
+
 8. Если есть возможность импортировать статично, то нужно импортировать статично.
 
 ## 7. Код [#code]
@@ -123,16 +126,40 @@ sidebarTitle: Главное
 >
 > Если используете сокращения, то используйте их во всём коде одинаково.
 
-- <span id="exp-1_6" /> 1.6. “Желательно избегать сокращений, исключение
-  составляет общепринятая нотация…” — Все допустимые сокращения: - src — source.
-  - const — constant. - var — variable. - func — function. - arr — array. - obj
-  — object. - char — character. - max — maximum. - min — minimum. - num —
-  number. - int — integer. - bool — boolean. - add — addition. - rm — remove. -
-  app — application. - auth — authentication. - cfg/config — configuration. -
-  dev — development. - env — environment. - dir — directory. - init —
-  initialize. - id — identifier. - msg — message. - req — request. - res —
-  response. - temp — temporary. - desc — descending. - asc — ascending. - img —
-  image. - nav — navigation.
+<span id="exp-1_6"></span>
+
+- 1.6. “Желательно избегать сокращений, исключение
+  составляет общепринятая нотация…” — Все допустимые сокращения:
+  - src — source.
+  - const — constant.
+  - var — variable.
+  - func — function.
+  - arr — array.
+  - obj — object.
+  - char — character.
+  - max — maximum.
+  - min — minimum.
+  - num — number.
+  - int — integer.
+  - bool — boolean.
+  - add — addition.
+  - rm — remove.
+  - app — application.
+  - auth — authentication.
+  - cfg/config — configuration.
+  - dev — development.
+  - env — environment.
+  - dir — directory.
+  - init — initialize.
+  - id — identifier.
+  - msg — message.
+  - req — request.
+  - res — response.
+  - temp — temporary.
+  - desc — descending.
+  - asc — ascending.
+  - img — image.
+  - nav — navigation.
 
   Также допускается использование метапеременных из математики: a, b, c, d, e, f; x, y, z, w; i, j, k.  
   И мета-чисел: 23, 42, 47, 69, 666, 0815, 1337, 4711\.  
