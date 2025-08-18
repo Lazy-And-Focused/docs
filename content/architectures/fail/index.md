@@ -1,13 +1,12 @@
 ---
-title: Документация по FAiL — Frontend Architecture in Lafka (or LAF)
+title: Документация по FAiL
 sidebarTitle: Об архитектуре
 ---
 
-# Документация по FAiL
-
 Вы перешли на главную страницу документации по frontend-части
-приложений, использующих архитектуру FAiL; изначально разработанную
-для [Lafka](https://github.com/Lazy-And-Focused/lafka).
+приложений, использующих архитектуру FAiL _(Frontend Architecture in
+LAF)_; изначально разработанную для
+[Lafka](https://github.com/Lazy-And-Focused/lafka).
 
 На самом деле была вдохновлена
 [FSD (Feature-Sliced Design)](https://feature-sliced.design/) и
