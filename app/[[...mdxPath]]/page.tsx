@@ -11,7 +11,10 @@ export async function generateMetadata(props: Props) {
   const { mdxPath } = await props.params;
   const { metadata } = await importPage(mdxPath);
 
-  return metadata;
+  return {
+    ...metadata,
+    title: `${metadata.title} ◌ Lazy And Focused`,
+  };
 }
 
 const Wrapper = getMDXComponents().wrapper;
