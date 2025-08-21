@@ -1,92 +1,18 @@
 ---
-sidebarTitle: Организация
+sidebarTitle: Рабочая папка
 ---
 
-import { FileTree } from "nextra/components";
-
-# Организация проекта в FAiL
+# Организация рабочего каталога в FAiL
 
 {/* prettier-ignore */}
 > [!CAUTION]
 >
 > Активно дорабатывается.
 
-## Структура _(общее представление)_ [#global-structure]
+Рабочий каталог это тот, в котором пишется весь основной код. Обычно
+он либо равен `~/src`, либо рутовому (`~/`).
 
-Для `~/src/` _(изначальная для FAiL)_:
-
-<FileTree className="w-full">
-  <FileTree.Folder name="node_modules">
-    Папка с модулями от Node.js
-  </FileTree.Folder>
-
-<FileTree.Folder name=".next | dist | build">
-  Папка со сборкой проекта (системная)
-</FileTree.Folder>
-
-<FileTree.Folder name="docs" />
-
-<FileTree.Folder name="public" />
-
-  <FileTree.Folder name="src" defaultOpen>
-    <FileTree.Folder name="app" defaultOpen>
-      <FileTree.Folder name="(home)">
-        <span>
-          Файл <code>page.tsx</code> был вынесен из
-           <code>~/src/app/page.tsx</code>
-        </span>
-        <FileTree.File name="page.tsx" />
-      </FileTree.Folder>
-
-      <FileTree.File name="globals.css" />
-      <FileTree.File name="layout.tsx" />
-    </FileTree.Folder>
-
-    <FileTree.Folder name="features" />
-    <FileTree.Folder name="widgets" defaultOpen>
-      <FileTree.Folder name="ui" />
-    </FileTree.Folder>
-    <FileTree.Folder name="entities" />
-    <FileTree.Folder name="shared" />
-
-  </FileTree.Folder>
-
-  <FileTree.File name="package.json" />
-  <FileTree.File name=".gitignore" />
-  <FileTree.File name="LICENSE" />
-  <FileTree.File name="README.md" />
-</FileTree>
-
-## Основные каталоги [#catalogs]
-
-Речь не про App, Shared, Widgets или подобным, а про каталоги в
-[рутовой области](../fail/introduction.mdx#root-zone).
-
-Данная область имеет структуру, схожую с:
-
-- `docs`
-
-  > Директория с документацией _(может быть вынесено)_.
-
-- `public`
-
-  > Папка со статичными ресурсами сервера. Внутри Вы можете встретить
-  > `favicon.ico` и другие интересности, если, конечно, они там есть
-  > 😅
-
-- `src` _(рабочая)_
-
-  > Рабочая директория со всеми основными файлами.
-  >
-  > Этого каталога может не быть, если вы используйте в качестве
-  > рабочей папки`~/`, а не `~/src`.
-
-- `.next` и `node_modules`
-
-  > Первая папка содержит билд проекта, вторая зависимости _("Да
-  > ладно!")_. Они **обязаны** быть включены в `.gitignore` файл.
-
-## Next.js | Source Folder [#nextjs-src]
+## Структура [#structure]
 
 Структура
 ([архитектура](https://nextjs.org/docs/app/getting-started/project-structure))
@@ -106,7 +32,7 @@ import { FileTree } from "nextra/components";
 
   > Сюда обычно входят такие файлы, как `middleware.ts` и `auth.ts`.
 
-## Next.js | Роутинг [#nextjs-routing]
+## Дочерняя "app" [#child-app]
 
 Вам уже известно, как работает
 [App Router](https://nextjs.org/docs/app) в Next.js. Если нет, то
@@ -135,7 +61,7 @@ import { FileTree } from "nextra/components";
   > компоненты и их логику стоит выносить в такие папки, как
   > `widgets` и `shared`.
 
-## Next.js | Вложенность [#nextjs-deep]
+## Вложенные в дочернюю "app" [#child-app-subs]
 
 Я не придумал, как ещё обозвать этот раздел, кроме как "вложенность"
 или "дочерние папки страницы". Хорошо, он будет о том, как Вы

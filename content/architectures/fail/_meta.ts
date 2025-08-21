@@ -1,5 +1,5 @@
 export default {
   introduction: {},
-  organization: {},
+  organization: "Организация",
   patterns: {},
 };
