@@ -24,26 +24,50 @@ sidebarTitle: Паттерны
 
 ## Next.js | Layouts & Pages
 
-Функциональные компоненты, экспортируемые по умолчанию, должны иметь
+Экспортируемые по умолчанию функциональные компоненты должны иметь
 нейминг вида: `ИмяТип`:
 
-```tsx
-// home/layout.tsx
-type LayoutProps = {
-  children: React.ReactNode;
-};
+```js
+// Пример для JS, но в команде используется TypeScript.
+// Кстати, под него также есть пример, но чуть ниже.
 
-export default function HomeLayout({ children }: LayoutProps) {
+// home/layout.js
+export default function HomeLayout({ children }) {
   return children;
 }
 
-// home/page.tsx
+// home/page.js
 export default function HomePage() {
   return <></>;
 }
 
-// user/page.tsx
+// users/page.js
 export default function UserPage() {
   return <></>;
+}
+```
+
+Но при этом имена для типов props имеют вид: `${Тип}Props`, как в
+примере ниже:
+
+```tsx
+// users/layout.tsx
+type LayoutProps = {
+  children: React.ReactNode;
+};
+
+export default function UsersLayout({ children }: LayoutProps) {
+  return children;
+}
+
+// users/[id]/page.tsx
+type PageProps = {
+  params: Promise<{ id: string }>
+};
+
+export default function UserPage({ params }: PageProps) {
+  const { id } = await params;
+
+  return <p>On this page: user with id "{id}"!</p>;
 }
 ```
