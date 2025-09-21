@@ -1,14 +1,14 @@
 import { generateStaticParamsFor, importPage } from "nextra/pages";
 import { useMDXComponents as getMDXComponents } from "@/mdx-components";
 
-export const generateStaticParams = generateStaticParamsFor("mdxPath");
+export const generateStaticParams = generateStaticParamsFor("slug");
 
 type Props = {
-  params: Promise<{ path_segments: string[] }>;
+  params: Promise<{ slug: string[] }>;
 };
 
 export async function generateMetadata(props: Props) {
-  const { path_segments: slug } = await props.params;
+  const { slug } = await props.params;
   const { metadata } = await importPage(slug);
 
   return {
@@ -20,7 +20,7 @@ export async function generateMetadata(props: Props) {
 const Wrapper = getMDXComponents().wrapper;
 
 export default async function Page(props: Props) {
-  const { path_segments: slug } = await props.params;
+  const { slug } = await props.params;
   const result = await importPage(slug);
 
   const { default: MDXContent, toc, metadata } = result;

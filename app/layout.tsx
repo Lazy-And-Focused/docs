@@ -1,6 +1,10 @@
 import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { Banner, Head } from "nextra/components";
+
 import { getPageMap } from "nextra/page-map";
+import { pageMap as graphqlEslintPageMap } from './(remote)/test-remote/[[...slug]]/page'
+
+
 import "nextra-theme-docs/style.css";
 
 const banner = (
@@ -12,6 +16,8 @@ const navbar = <Navbar logo={<b>LAF/Documentation</b>} />;
 const footer = (
   <Footer>2025-{new Date().getFullYear()} © Lazy And Focused</Footer>
 );
+
+const pageMap = [...(await getPageMap()), graphqlEslintPageMap]
 
 export default async function RootLayout({
   children,
@@ -30,7 +36,7 @@ export default async function RootLayout({
         <Layout
           banner={banner}
           navbar={navbar}
-          pageMap={await getPageMap()}
+          pageMap={pageMap}
           footer={footer}
           docsRepositoryBase="https://github.com/Lazy-And-Focused/docs/tree/main"
         >
