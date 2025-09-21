@@ -1,25 +1,32 @@
-import { notFound } from "next/navigation";
-import { compileMdx } from "nextra/compile";
+import { useMDXComponents as getMDXComponents } from "@/mdx-components";
+
 import { Callout, Tabs } from "nextra/components";
+
+import { compileMdx } from "nextra/compile";
 import { evaluate } from "nextra/evaluate";
 import {
   convertToPageMap,
   mergeMetaWithPageMap,
   normalizePageMap,
 } from "nextra/page-map";
-import { useMDXComponents as getMDXComponents } from "../../../../mdx-components";
+import { notFound } from "next/navigation";
+
 import { remotes } from "./_config";
 
 const remote = remotes[0];
 
 const { mdxPages, pageMap: _pageMap } = convertToPageMap({
   filePaths: remote.files,
+  // Не может быть типа `/path/to/hello`, только так: `/path-to-hello`...
+  // ...надеюсь найдутся те, у кого есть свободное время на фикс
   basePath: remote.localUrl,
 });
 
-// `mergeMetaWithPageMap` is used to change sidebar order and title
+// `mergeMetaWithPageMap` используется для изменения sidebar order и заголовка
 const eslintPageMap = mergeMetaWithPageMap(_pageMap[0]!, {
-  index: "Introduction",
+  index: "Введение",
+  "file-structure": "Файловая структура",
+  route: "Роутинг",
 });
 
 export const pageMap = normalizePageMap(eslintPageMap);
@@ -35,36 +42,54 @@ type PageProps = Readonly<{
   }>;
 }>;
 
-export default async function Page(props: PageProps) {
-  const params = await props.params;
-  const route = params.slug?.join("/") ?? "";
-  const filePath = mdxPages[route];
-
-  if (!filePath) {
-    notFound();
-  }
-  
-  const response = await fetch(
-    `https://raw.githubusercontent.com/${remote.url.user}/${remote.url.repo}/${remote.url.branch}/${remote.url.docsPath}${filePath}`
-  );
-  const data = await response.text();
-  const rawJs = await compileMdx(data, {
-    filePath,
-    mdxOptions: { format: "detect" },
-  });
-  const { default: MDXContent, toc, metadata } = evaluate(rawJs, components);
-
-  return (
-    <Wrapper toc={toc} metadata={metadata} sourceCode={rawJs}>
-      <MDXContent />
-    </Wrapper>
-  );
-}
-
 export function generateStaticParams() {
   const params = Object.keys(mdxPages).map((route) => ({
     slug: route.split("/"),
   }));
 
   return params;
+}
+
+export default async function TestRemotePage({ params }: PageProps) {
+  const { slug } = await params;
+  const route = slug?.join("/") ?? "";
+  const filePath = mdxPages[route];
+
+  if (!filePath) {
+    notFound();
+  }
+
+  const data = await fetch(generateFileRemoteUrl(remote.url, filePath)).then(
+    (res) => res.text()
+  );
+  const compiledFile = await compileMdx(data, {
+    filePath,
+    mdxOptions: { format: "detect" },
+  });
+  const {
+    default: MDXContent,
+    toc,
+    metadata,
+  } = evaluate(compiledFile, components);
+
+  return (
+    <Wrapper toc={toc} metadata={metadata}>
+      <MDXContent />
+    </Wrapper>
+  );
+}
+
+function generateFileRemoteUrl(
+  remoteUrls: {
+    user: string;
+    repo: string;
+    branch: string;
+    docsPath: string;
+  },
+  filePath: string
+) {
+  const base = "https://raw.githubusercontent.com/";
+  const home = `${remoteUrls.user}/${remoteUrls.repo}/${remoteUrls.branch}/`;
+
+  return `${base}${home}${remoteUrls.docsPath}${filePath}`;
 }

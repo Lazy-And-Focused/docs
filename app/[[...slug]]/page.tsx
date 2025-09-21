@@ -3,11 +3,11 @@ import { useMDXComponents as getMDXComponents } from "@/mdx-components";
 
 export const generateStaticParams = generateStaticParamsFor("slug");
 
-type Props = {
+type PageProps = {
   params: Promise<{ slug: string[] }>;
 };
 
-export async function generateMetadata(props: Props) {
+export async function generateMetadata(props: PageProps) {
   const { slug } = await props.params;
   const { metadata } = await importPage(slug);
 
@@ -19,7 +19,7 @@ export async function generateMetadata(props: Props) {
 
 const Wrapper = getMDXComponents().wrapper;
 
-export default async function Page(props: Props) {
+export default async function DocumentationPage(props: PageProps) {
   const { slug } = await props.params;
   const result = await importPage(slug);
 
