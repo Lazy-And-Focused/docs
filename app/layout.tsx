@@ -1,4 +1,4 @@
-import type { Folder, PageMapItem } from "nextra";
+import type { Folder, MetaJsonFile, PageMapItem } from "nextra";
 
 import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { Banner, Head } from "nextra/components";
@@ -18,32 +18,36 @@ const footer = (
   <Footer>2025-{new Date().getFullYear()} © Lazy And Focused</Footer>
 );
 
-const pageMap = [...(await getPageMap()), ...remotePageMap].reduceRight(
-  (acc: PageMapItem[], obj: PageMapItem) => {
-    const existingIndex = acc.findIndex((item) => {
-      return "name" in item && "name" in obj && item.name === obj.name;
-    });
+const mergePageMapItems = (
+  returnedArray: PageMapItem[],
+  newItem: PageMapItem
+) => {
+  const existingIndex = returnedArray.findIndex(
+    (item) => "name" in item && "name" in newItem && item.name === newItem.name
+  );
 
-    if (existingIndex > -1) {
-      acc[existingIndex] = {
-        ...acc[existingIndex],
-        ...obj,
+  if (existingIndex > -1) {
+    returnedArray[existingIndex] = {
+      ...newItem,
+      ...returnedArray[existingIndex],
 
-        children: [
-          ...((acc[existingIndex] as Folder<PageMapItem>).children || []),
-          ...((obj as Folder<PageMapItem>).children || []),
-        ],
-      };
-    } else {
-      acc.push(obj);
-    }
+      children: [
+        ...((returnedArray[existingIndex] as Folder<PageMapItem>).children ||
+          []),
+        ...((newItem as Folder<PageMapItem>).children || []),
+      ].reduce(mergePageMapItems, []),
+    };
+  } else {
+    returnedArray.push(newItem);
+  }
 
-    return acc;
-  },
+  return returnedArray;
+};
+
+const pageMap = [...(await getPageMap()), ...remotePageMap].reduce(
+  mergePageMapItems,
   []
 );
-
-console.log(pageMap);
 
 export default async function RootLayout({
   children,
