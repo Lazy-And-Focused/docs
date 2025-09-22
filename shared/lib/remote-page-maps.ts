@@ -5,7 +5,7 @@ import {
 } from "nextra/page-map";
 import { remotes } from "@/shared/config/remotes";
 
-export const pageMaps = remotes.map((remote) => {
+export const pageMap = remotes.map((remote) => {
   const { pageMap: _pageMap } = convertToPageMap({
     filePaths: remote.files,
     basePath: remote.localUrl,

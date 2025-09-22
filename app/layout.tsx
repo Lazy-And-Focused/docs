@@ -1,8 +1,10 @@
+import type { Folder, PageMapItem } from "nextra";
+
 import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { Banner, Head } from "nextra/components";
 
 import { getPageMap } from "nextra/page-map";
-import { pageMaps as remotePageMaps } from "@/shared/lib/remote-page-maps";
+import { pageMap as remotePageMap } from "@/shared/lib/remote-page-maps";
 
 import "nextra-theme-docs/style.css";
 
@@ -16,18 +18,21 @@ const footer = (
   <Footer>2025-{new Date().getFullYear()} © Lazy And Focused</Footer>
 );
 
-const pageMap = [...(await getPageMap()), ...remotePageMaps].reduce(
-  (acc: any[], obj: any) => {
-    const existingIndex = acc.findIndex(
-      (item: { name: any }) => item.name === obj.name
-    );
+const pageMap = [...(await getPageMap()), ...remotePageMap].reduceRight(
+  (acc: PageMapItem[], obj: PageMapItem) => {
+    const existingIndex = acc.findIndex((item) => {
+      return "name" in item && "name" in obj && item.name === obj.name;
+    });
 
     if (existingIndex > -1) {
       acc[existingIndex] = {
-        ...obj,
         ...acc[existingIndex],
-        
-        children: [...acc[existingIndex].children, ...obj.children],
+        ...obj,
+
+        children: [
+          ...((acc[existingIndex] as Folder<PageMapItem>).children || []),
+          ...((obj as Folder<PageMapItem>).children || []),
+        ],
       };
     } else {
       acc.push(obj);
@@ -37,6 +42,8 @@ const pageMap = [...(await getPageMap()), ...remotePageMaps].reduce(
   },
   []
 );
+
+console.log(pageMap);
 
 export default async function RootLayout({
   children,
