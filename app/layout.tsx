@@ -2,7 +2,7 @@ import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { Banner, Head } from "nextra/components";
 
 import { getPageMap } from "nextra/page-map";
-import { pageMaps as remotePageMaps } from "@/app/_remote-page-map";
+import { pageMaps as remotePageMaps } from "@/shared/lib/remote-page-maps";
 
 import "nextra-theme-docs/style.css";
 

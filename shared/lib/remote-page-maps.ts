@@ -3,7 +3,7 @@ import {
   mergeMetaWithPageMap,
   normalizePageMap,
 } from "nextra/page-map";
-import { remotes } from "../(remote)/_test-remote/[[...slug]]/_config/remotes";
+import { remotes } from "@/shared/config/remotes";
 
 export const pageMaps = remotes.map((remote) => {
   const { pageMap: _pageMap } = convertToPageMap({

@@ -2,18 +2,16 @@ import { useMDXComponents as getMDXComponents } from "@/mdx-components";
 import { Callout, Tabs } from "nextra/components";
 
 import { notFound } from "next/navigation";
-import {
-  convertToPageMap,
-  mergeMetaWithPageMap,
-  normalizePageMap,
-} from "nextra/page-map";
-import { evaluate } from "nextra/evaluate";
 import { compileMdx } from "nextra/compile";
+import { evaluate } from "nextra/evaluate";
+import {
+  convertToPageMap
+} from "nextra/page-map";
 
 import {
   type RemoteConfig,
   remotes,
-} from "@/app/(remote)/_test-remote/[[...slug]]/_config/remotes";
+} from "@/shared/config/remotes";
 
 type Props = {
   params: Promise<{

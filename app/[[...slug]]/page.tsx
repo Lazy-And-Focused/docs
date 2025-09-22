@@ -1,4 +1,4 @@
-import { remotes } from "../(remote)/_test-remote/[[...slug]]/_config/remotes";
+import { remotes } from "@/shared/config/remotes";
 import { LocalModeComponent, RemoteModeComponent } from "./_view";
 
 // export const generateStaticParams = generateStaticParamsFor("slug");
