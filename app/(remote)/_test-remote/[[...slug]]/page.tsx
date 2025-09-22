@@ -11,7 +11,7 @@ import {
 } from "nextra/page-map";
 import { notFound } from "next/navigation";
 
-import { remotes } from "./_config";
+import { remotes } from "./_config/remotes";
 
 const remote = remotes[0];
 
@@ -19,14 +19,14 @@ const { mdxPages, pageMap: _pageMap } = convertToPageMap({
   filePaths: remote.files,
   // Не может быть типа `/path/to/hello`, только так: `/path-to-hello`...
   // ...надеюсь найдутся те, у кого есть свободное время на фикс
-  basePath: remote.localUrl,
+  basePath: "test-remote/" + remote.localUrl,
 });
 
 // `mergeMetaWithPageMap` используется для изменения sidebar order и заголовка
 const eslintPageMap = mergeMetaWithPageMap(_pageMap[0]!, {
-  index: "Введение",
-  "file-structure": "Файловая структура",
-  route: "Роутинг",
+  // index: "Введение",
+  // "file-structure": "Файловая структура",
+  // route: "Роутинг",
 });
 
 export const pageMap = normalizePageMap(eslintPageMap);
@@ -52,8 +52,10 @@ export function generateStaticParams() {
 
 export default async function TestRemotePage({ params }: PageProps) {
   const { slug } = await params;
-  const route = slug?.join("/") ?? "";
+  const route = slug?.join("/").replace(remote.localUrl, "") ?? "";
   const filePath = mdxPages[route];
+
+  console.log(route, filePath);
 
   if (!filePath) {
     notFound();
@@ -80,7 +82,7 @@ export default async function TestRemotePage({ params }: PageProps) {
 }
 
 function generateFileRemoteUrl(
-  remoteUrls: {
+  remoteUrl: {
     user: string;
     repo: string;
     branch: string;
@@ -89,7 +91,7 @@ function generateFileRemoteUrl(
   filePath: string
 ) {
   const base = "https://raw.githubusercontent.com/";
-  const home = `${remoteUrls.user}/${remoteUrls.repo}/${remoteUrls.branch}/`;
+  const home = `${remoteUrl.user}/${remoteUrl.repo}/${remoteUrl.branch}/`;
 
-  return `${base}${home}${remoteUrls.docsPath}${filePath}`;
+  return `${base}${home}${remoteUrl.docsPath}${filePath}`;
 }

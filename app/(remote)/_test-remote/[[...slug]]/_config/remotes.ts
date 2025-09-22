@@ -1,21 +1,20 @@
-
 export type RemoteConfig = {
-    localUrl: string;
-    url: {
-      user: string;
-      repo: string;
-      branch: string;
-      docsPath: string;
-    };
-    files: string[];
-}
+  localUrl: string;
+  url: {
+    user: string;
+    repo: string;
+    branch: string;
+    docsPath: string;
+  };
+  files: string[];
+};
 
 /**
  * Пока что это служит только для тестов, так что будет улучшаться
  */
 export const remotes: RemoteConfig[] = [
   {
-    localUrl: "test-remote",
+    localUrl: "architectures/bad",
     url: {
       user: "Lazy-And-Focused",
       repo: "BAD-template",

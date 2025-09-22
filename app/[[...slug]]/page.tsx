@@ -1,33 +1,43 @@
 import { generateStaticParamsFor, importPage } from "nextra/pages";
 import { useMDXComponents as getMDXComponents } from "@/mdx-components";
+import { remotes } from "../(remote)/_test-remote/[[...slug]]/_config/remotes";
+import { LocalModeComponent } from "./_view/local";
+import { RemoteModeComponent } from "./_view/remote";
 
-export const generateStaticParams = generateStaticParamsFor("slug");
+// export const generateStaticParams = generateStaticParamsFor("slug");
 
 type PageProps = {
   params: Promise<{ slug: string[] }>;
 };
 
-export async function generateMetadata(props: PageProps) {
-  const { slug } = await props.params;
-  const { metadata } = await importPage(slug);
+// export async function generateMetadata(props: PageProps) {
+//   const { slug } = await props.params;
+//   const { metadata } = await importPage(slug);
 
-  return {
-    ...metadata,
-    title: `${metadata.title} ◌ Lazy And Focused`,
-  };
-}
+//   return {
+//     ...metadata,
+//     title: `${metadata.title} ◌ Lazy And Focused`,
+//   };
+// }
 
 const Wrapper = getMDXComponents().wrapper;
 
 export default async function DocumentationPage(props: PageProps) {
   const { slug } = await props.params;
-  const result = await importPage(slug);
+  const isRemote = validateRemote(slug || []);
 
-  const { default: MDXContent, toc, metadata } = result;
+  if (isRemote) {
+    return <RemoteModeComponent {...props} />;
+  } else {
+    return <LocalModeComponent {...props} />;
+  }
+}
 
-  return (
-    <Wrapper toc={toc} metadata={metadata}>
-      <MDXContent {...props} params={props.params} />
-    </Wrapper>
-  );
+function validateRemote(slug: string[]): boolean {
+  const path = slug.join("/");
+  const remote = remotes.find((remote) => {
+    return path.startsWith(remote.localUrl);
+  });
+
+  return !!remote;
 }
