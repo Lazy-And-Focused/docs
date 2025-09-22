@@ -26,6 +26,7 @@ const pageMap = [...(await getPageMap()), ...remotePageMaps].reduce(
       acc[existingIndex] = {
         ...obj,
         ...acc[existingIndex],
+        
         children: [...acc[existingIndex].children, ...obj.children],
       };
     } else {
