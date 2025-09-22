@@ -1,10 +1,10 @@
-import type { Folder, MetaJsonFile, PageMapItem } from "nextra";
+import type { Folder, PageMapItem } from "nextra";
 
 import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { Banner, Head } from "nextra/components";
 
-import { getPageMap } from "nextra/page-map";
 import { pageMap as remotePageMap } from "@/shared/lib/remote-page-maps";
+import { getPageMap } from "nextra/page-map";
 
 import "nextra-theme-docs/style.css";
 
