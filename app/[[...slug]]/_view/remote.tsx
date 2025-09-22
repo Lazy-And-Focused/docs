@@ -21,26 +21,12 @@ type Props = {
   }>;
 };
 
-function generatePageMap(remote: RemoteConfig) {
-  const { mdxPages, pageMap: _pageMap } = convertToPageMap({
+function getMdxPages(remote: RemoteConfig) {
+  const { mdxPages } = convertToPageMap({
     filePaths: remote.files,
     basePath: remote.localUrl,
   });
-
-  // `mergeMetaWithPageMap` используется для изменения sidebar order и заголовка
-  const eslintPageMap = mergeMetaWithPageMap(_pageMap[0]!, {
-    // index: "Введение",
-    // "file-structure": "Файловая структура",
-    // route: "Роутинг",
-  });
-
-  const pageMap = normalizePageMap(eslintPageMap);
-
-  return {
-    mdxPages,
-    eslintPageMap,
-    pageMap,
-  };
+  return mdxPages;
 }
 
 const { wrapper: Wrapper, ...components } = getMDXComponents({
@@ -58,7 +44,7 @@ export async function RemoteModeComponent(props: Props) {
     return notFound();
   }
 
-  const { mdxPages } = generatePageMap(remote);
+  const mdxPages = getMdxPages(remote);
 
   const route = slug?.join("/").replace(remote.localUrl + "/", "") ?? "";
   const filePath = mdxPages[route];

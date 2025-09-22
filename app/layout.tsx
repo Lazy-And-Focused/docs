@@ -2,7 +2,7 @@ import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { Banner, Head } from "nextra/components";
 
 import { getPageMap } from "nextra/page-map";
-import { pageMap as testRemotePageMap } from "./(remote)/_test-remote/[[...slug]]/page";
+import { pageMaps as remotePageMaps } from "@/app/_remote-page-map";
 
 import "nextra-theme-docs/style.css";
 
@@ -16,7 +16,26 @@ const footer = (
   <Footer>2025-{new Date().getFullYear()} © Lazy And Focused</Footer>
 );
 
-const pageMap = [...(await getPageMap()), testRemotePageMap];
+const pageMap = [...(await getPageMap()), ...remotePageMaps].reduce(
+  (acc: any[], obj: any) => {
+    const existingIndex = acc.findIndex(
+      (item: { name: any }) => item.name === obj.name
+    );
+
+    if (existingIndex > -1) {
+      acc[existingIndex] = {
+        ...obj,
+        ...acc[existingIndex],
+        children: [...acc[existingIndex].children, ...obj.children],
+      };
+    } else {
+      acc.push(obj);
+    }
+
+    return acc;
+  },
+  []
+);
 
 export default async function RootLayout({
   children,

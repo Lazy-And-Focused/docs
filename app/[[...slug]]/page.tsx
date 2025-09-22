@@ -1,8 +1,5 @@
-import { generateStaticParamsFor, importPage } from "nextra/pages";
-import { useMDXComponents as getMDXComponents } from "@/mdx-components";
 import { remotes } from "../(remote)/_test-remote/[[...slug]]/_config/remotes";
-import { LocalModeComponent } from "./_view/local";
-import { RemoteModeComponent } from "./_view/remote";
+import { LocalModeComponent, RemoteModeComponent } from "./_view";
 
 // export const generateStaticParams = generateStaticParamsFor("slug");
 
@@ -19,8 +16,6 @@ type PageProps = {
 //     title: `${metadata.title} ◌ Lazy And Focused`,
 //   };
 // }
-
-const Wrapper = getMDXComponents().wrapper;
 
 export default async function DocumentationPage(props: PageProps) {
   const { slug } = await props.params;
