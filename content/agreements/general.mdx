@@ -167,7 +167,7 @@ sidebarTitle: Главное
   И мета-чисел: 23, 42, 47, 69, 666, 0815, 1337, 4711\.  
   Также допускается сокращения до одной буквы, когда используются методы массивов/объектов/…, например:
 
-  ```js
+  ```ts
   const numbers = [1, 2, 3, 4, 5, 6];
   const otherNumber = numbers.map((n) => n * 2);
   ```
@@ -181,7 +181,7 @@ sidebarTitle: Главное
 
 - <span id="exp-4_6" /> 4.6.
 
-  ```js
+  ```ts
   // Так нельзя
   class ExampleClass {
     hello = () => {
@@ -191,7 +191,7 @@ sidebarTitle: Главное
 
   // Так можно
   class ExampleClass {
-    hello() {
+    public hello() {
       console.log();
     }
   }
@@ -201,7 +201,7 @@ sidebarTitle: Главное
 
 - <span id="exp-6_1" /> 6.1.
 
-  ```js
+  ```ts
   export import("some-path");
   ```
 
@@ -209,7 +209,7 @@ sidebarTitle: Главное
 
 - <span id="exp-6_2" /> 6.2.
 
-  ```js
+  ```ts
   import type { SomeClass, SomeType, SomeInterface } from "path-to";
 
   // SomeType и SomeInteraface всегда импортируются, как типы
@@ -220,7 +220,7 @@ sidebarTitle: Главное
 
 - <span id="exp-6_7" /> 6.7.
 
-  ```js
+  ```ts
   import "dotenv/config"; // init-импорт, который обязательно должен быть в начале
 
   import type {
@@ -243,7 +243,7 @@ sidebarTitle: Главное
 - <span id="exp-7_5" /> 7.5. “Использовать пояснительные переменные” — Объявлять
   переменные, когда записываешь условие или результат функции.
 
-  ```js
+  ```ts
   const transferAllowed =
     hasSufficientBalance(account.balance, transfer.amount) &&
     account.isActive();
@@ -260,7 +260,7 @@ sidebarTitle: Главное
 - <span id="exp-7_9" /> 7.9. “Желательно не опускать фигурные скобки” — см.
   снимок экрана.
 
-  ```js
+  ```ts
   // Без опускания фигурных скобок
   if (transferAllowed) {
     console.log("Transfer successful.");
