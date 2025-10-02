@@ -9,7 +9,9 @@ const banner = (
   </Banner>
 );
 const navbar = <Navbar logo={<b>LAF/Documentation</b>} />;
-const footer = <Footer>2025-{new Date().getFullYear()} © Lazy And Focused</Footer>;
+const footer = (
+  <Footer>2025-{new Date().getFullYear()} © Lazy And Focused</Footer>
+);
 
 export default async function RootLayout({
   children,
