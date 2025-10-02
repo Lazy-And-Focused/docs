@@ -31,7 +31,7 @@ sidebarTitle: Паттерны
 
 Это было небольшое отступление к тому, что есть вероятность, что в
 FAiL есть закономерности, нарушающие основное соглашение, но подобные
-моменты мы стараемся сгладить, придти к ком_promise_ (за каламбур
+моменты мы стараемся сгладить, придти к ком*promise* (за каламбур
 извиняюсь)... Ладно, захватите чашу риса, если хотите, ну или суп мису, а мы
 продолжаем.
 
@@ -42,10 +42,12 @@ const API_BACKEND = "https://example.com/api";
 
 // Переменные
 const isAdmin = false;
-let name = "Failtin";  // каламбур намбер ван
+let name = "Failtin"; // каламбур намбер ван
 
-export default function ExampleCatPage({ params: { id }}: {
-  params: Promise<{ id: string }>
+export default function ExampleCatPage({
+  params: { id },
+}: {
+  params: Promise<{ id: string }>;
 }) {
   // Стейты и ещё переменные
   const [cat, setCat] = useState<{ name: string } | null>();
@@ -58,8 +60,8 @@ export default function ExampleCatPage({ params: { id }}: {
       const data = response.then((res) => res.json());
 
       setCat(data); // "{ name: "Boris" }" — кому интересно :>
-                    //                       а ещё кот не мой,
-                    //                       у мя Перс
+      //                       а ещё кот не мой,
+      //                       у мя Перс
     }
 
     fetchData();
@@ -72,7 +74,7 @@ export default function ExampleCatPage({ params: { id }}: {
     return `Meow, ${cat.name}!`;
   }
 
-  return <span>Loading is not supported, lol 😅</span>
+  return <span>Loading is not supported, lol 😅</span>;
 }
 
 // Кстати, если в коде есть ошибки, то не серчайся...
@@ -105,17 +107,17 @@ export default function ExampleCatPage({ params: { id }}: {
 с паттернами. Что же, тут всё ясно:
 
 1. Избегайте ситуаций, когда самолёт в добавок и дом, и сад, и мяч и
-вертолёт — выносите логику, несвязанную с компонентом напрямую, в
-дочерние файлы
+   вертолёт — выносите логику, несвязанную с компонентом напрямую, в
+   дочерние файлы
 2. Также старайтесь выносить функции из функций, выносить хуки в
-отдельные файлы и тому подобные вещи. Исключением являются те хуки
-или функции, которые не занимают много места на экране
-среднестатистического ноутбука (где-то примерно в районе
-1280-1920px), или когда их мало.
+   отдельные файлы и тому подобные вещи. Исключением являются те хуки
+   или функции, которые не занимают много места на экране
+   среднестатистического ноутбука (где-то примерно в районе
+   1280-1920px), или когда их мало.
 3. Избавляйтесь от дублирующихся копонентов: RedButton, BlueButton,
-WiFiButton, BluetoothButton, BatonButton, BottomBattonButton... Ну вы
-поняли меня... Лучше создать универсальный компонент Button с
-возможностью кастомизации, нежели плодить кучу зомби-вирусов.
+   WiFiButton, BluetoothButton, BatonButton, BottomBattonButton... Ну вы
+   поняли меня... Лучше создать универсальный компонент Button с
+   возможностью кастомизации, нежели плодить кучу зомби-вирусов.
 
 ## Next.js | Layouts & Pages
 
@@ -165,4 +167,74 @@ export default function UserPage({ params }: PageProps) {
 
   return <p>On this page: user with id "{id}"!</p>;
 }
+```
+
+## Импорты [#imports]
+
+Сортируйте импорты по следующему шаблону:
+
+1. Типы
+2. React-хуки
+3. Компоненты
+4. Контексты и провайдеры
+5. Вспомогательные функции или классы
+6. Константы
+7. Дополнительные данные, такие как стили или JSON
+
+Вот пример:
+
+```ts
+// Без понятия, где вы столько каши увидите, но держите...
+
+// Типы
+import type { Member } from "@entities/member";
+import type { ChatMessage } from "@shared/types";
+
+// React-хуки
+import { useState, useEffect } from "react";
+
+// Компоненты
+import { ChatWrapper, ChatMessage, UserAvatar } from "@shared/components";
+import { Button } from "@shared/components/ui";
+
+import { SendIcon, ProfileIcon } from "@icons";
+
+// Контексты и провайдеры
+import { ChatProvider } from "@shared/lib/providers";
+
+// Вспомогательная функция
+import { parseMessage, getMessages } from "@shared/lib/messages";
+
+// Константы
+import { PRIMARY, WARNING } from "@shared/constants/colors";
+
+// Стили и другое
+import style from "./example-chat.module.css";
+import layoutJson from "./customization/layout.json";
+```
+
+## Экспорты [#exports]
+
+Желательно, чтобы у каталога, особенно у вспомогательного
+_(утилитарного)_, был `index.ts` с ре-экспортом данных, если это
+возможно:
+
+```ts
+// мы с вами в example/index.ts
+
+//       example/foo.ts
+export * from "./foo.ts";
+//       example/bar.ts
+export * from "./bar.ts";
+```
+
+А также компонент не должен иметь экспорт по умолчанию, если не
+является страницей:
+
+```tsx
+export function AppHeader() {
+  return <header>Hello, World!</header>;
+}
+// Будет лишним, так как не является страницей:
+// export default AppHeader;
 ```
