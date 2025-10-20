@@ -22,32 +22,60 @@ const mergePageMapItems = (
   returnedArray: PageMapItem[],
   newItem: PageMapItem
 ) => {
+  // Ищем элемент с таким же именем
   const existingIndex = returnedArray.findIndex(
     (item) => "name" in item && "name" in newItem && item.name === newItem.name
   );
 
   if (existingIndex > -1) {
-    returnedArray[existingIndex] = {
-      ...newItem,
-      ...returnedArray[existingIndex],
+    // Найден дубликат - объединяем
+    const existingItem = returnedArray[existingIndex];
 
-      children: [
-        ...((returnedArray[existingIndex] as Folder<PageMapItem>).children ||
-          []),
-        ...((newItem as Folder<PageMapItem>).children || []),
-      ].reduce(mergePageMapItems, []),
+    // Создаём объединённый элемент с приоритетом локальных данных
+    const mergedItem = {
+      ...newItem, // Сначала берём удалённые свойства
+      ...existingItem, // Перезаписываем локальными (приоритет)
     };
+
+    // Обработка frontMatter с приоритетом локальных данных
+    if ('frontMatter' in existingItem && 'frontMatter' in newItem) {
+      (mergedItem as any).frontMatter = {
+        ...(newItem as any).frontMatter,
+        ...(existingItem as any).frontMatter,
+      };
+    }
+
+    // Обработка children - объединяем рекурсивно
+    if ('children' in existingItem || 'children' in newItem) {
+      const existingChildren = (existingItem as any).children || [];
+      const newChildren = (newItem as any).children || [];
+
+      mergedItem.children = [...existingChildren, ...newChildren].reduce(
+        mergePageMapItems,
+        []
+      );
+    }
+
+    returnedArray[existingIndex] = mergedItem;
   } else {
+    // Элемент с таким именем не найден - просто добавляем
     returnedArray.push(newItem);
   }
 
   return returnedArray;
 };
 
-const pageMap = [...(await getPageMap()), ...remotePageMap].reduce(
+// Для отладки - посмотрим что у нас в pageMap
+const localPageMap = await getPageMap();
+console.log('Локальный pageMap:', localPageMap.length, 'элементов');
+console.log('Удалённый pageMap:', remotePageMap.length, 'элементов');
+
+const pageMap = [...localPageMap, ...remotePageMap].reduce(
   mergePageMapItems,
   []
 );
+
+console.log('Объединённый pageMap:', pageMap.length, 'элементов');
 
 export default async function RootLayout({
   children,

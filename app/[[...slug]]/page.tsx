@@ -29,9 +29,12 @@ export default async function DocumentationPage(props: PageProps) {
 }
 
 function validateRemote(slug: string[]): boolean {
+  if (!slug || slug.length === 0) return false;
+
   const path = slug.join("/");
   const remote = remotes.find((remote) => {
-    return path.startsWith(remote.localUrl);
+    // Проверяем точное соответствие или начало пути
+    return path === remote.localUrl || path.startsWith(remote.localUrl + "/");
   });
 
   return !!remote;
