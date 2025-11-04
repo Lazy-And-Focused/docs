@@ -7,9 +7,9 @@ sidebarTitle: Паттерны
 {/* prettier-ignore */}
 > [!CAUTION]
 >
-> Эта страница проектируется, пишется и обсуждается. Если есть предложения, то
-> не стесняйтесь писать [в issue](https://github.com/Lazy-And-Focused/LAFka/issues)
-> или [в чат Telegram](https://t.me/laf_disccussion).
+> Эта страница проектируется, пишется и обсуждается. Если есть
+> предложения, то не стесняйтесь создавать issue или писать
+> [в чат Telegram](https://t.me/laf_disccussion).
 
 Раздел посвящён неймингу и паттернам, которые Вы должны соблюдать в
 рамках кода для Frontend-части приложения.
@@ -114,7 +114,7 @@ export default function ExampleCatPage({
    или функции, которые не занимают много места на экране
    среднестатистического ноутбука (где-то примерно в районе
    1280-1920px), или когда их мало.
-3. Избавляйтесь от дублирующихся копонентов: RedButton, BlueButton,
+3. Избавляйтесь от дублирующихся компонентов: RedButton, BlueButton,
    WiFiButton, BluetoothButton, BatonButton, BottomBattonButton... Ну вы
    поняли меня... Лучше создать универсальный компонент Button с
    возможностью кастомизации, нежели плодить кучу зомби-вирусов.
@@ -174,12 +174,13 @@ export default function UserPage({ params }: PageProps) {
 Сортируйте импорты по следующему шаблону:
 
 1. Типы
-2. React-хуки
+2. React (если необхходимо)
 3. Компоненты
-4. Контексты и провайдеры
-5. Вспомогательные функции или классы
-6. Константы
-7. Дополнительные данные, такие как стили или JSON
+4. Кастомные хуки
+5. Контексты и провайдеры
+6. Вспомогательные функции или классы
+7. Константы, переменные-списки для компонентов
+8. Дополнительные данные, такие как стили или JSON
 
 Вот пример:
 
@@ -198,6 +199,9 @@ import { ChatWrapper, ChatMessage, UserAvatar } from "@shared/components";
 import { Button } from "@shared/components/ui";
 
 import { SendIcon, ProfileIcon } from "@icons";
+
+// Кастомные хуки
+import { useChat } from "@shared/lib/channels";
 
 // Контексты и провайдеры
 import { ChatProvider } from "@shared/lib/providers";
@@ -237,4 +241,76 @@ export function AppHeader() {
 }
 // Будет лишним, так как не является страницей:
 // export default AppHeader;
+```
+
+## Стилизация
+
+Используется модульная CSS-система компонентов при работе с Vanilla
+CSS или SASS (SCSS).
+
+При работе с Tailwind CSS и подобными фреймворками или библиотека,
+желательно выносить имена классов в константы:
+
+```tsx
+import type { HeaderNavLink } from './types';
+
+import { AppHeaderLogotype, AppHeaderSocialLinks } from './ui';
+import { DefaultAppHeader, MobileAppHeader } from './variants';
+
+import { WebsiteIcon } from '@icons';
+
+import { useShiftPosition } from './hooks/use-shift-position';
+import { useDeviceWidth } from '@shared/hooks';
+
+import clsx from 'clsx';
+
+import { HEADER_SOCIAL_LINKS } from '@shared/lib/constants';
+
+const STYLE = {
+  CONTAINER: {
+    BASE: [
+      'fixed z-50 inset-x-0 top-0',
+      'px-4 py-3',
+      'grid grid-cols-[6rem_minmax(6rem,_1fr)_6rem]',
+      'justify-items-center',
+      'border-b-2',
+      'transition duration-500 ease-in-out',
+    ].join(' '),
+    SHIFTED: {
+      YES: 'border-primary/75 bg-base-100/20 backdrop-blur-md',
+      NO: 'border-transparent',
+    },
+  },
+} as const;
+
+const socialLinks = HEADER_SOCIAL_LINKS.map((link) => ({
+  id: link.id,
+  href: link.url,
+  name: link.customName || link.platform.name,
+  icon: link.platform.icon || WebsiteIcon,
+}));
+
+export function AppHeader({ links }: { links: HeaderNavLink[] }) {
+  const shifted = useShiftPosition();
+  const deviceWidth = useDeviceWidth();
+
+  return (
+    <header
+      className={clsx(
+        STYLE.CONTAINER.BASE,
+        shifted ? STYLE.CONTAINER.SHIFTED.YES : STYLE.CONTAINER.SHIFTED.NO,
+      )}
+    >
+      <AppHeaderLogotype />
+
+      {!(deviceWidth <= 670) ? (
+        <DefaultAppHeader links={links} />
+      ) : (
+        <MobileAppHeader links={links} />
+      )}
+
+      <AppHeaderSocialLinks linkSize={20} links={socialLinks} />
+    </header>
+  );
+};
 ```
