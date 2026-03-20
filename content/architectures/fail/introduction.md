@@ -102,6 +102,6 @@ FAiL была вдохновлена [Feature-Sliced Design (FSD)](https://featu
 
 Дальше вам будет предложено:
 
-1. [Изучить структуру проекта в App Router](../fail/organization.mdx)
+1. [Изучить структуру проекта в App Router](./organization.mdx)
 2. [Изучить соглашение команды о стиле кодинга](../../agreements/general.mdx)
-3. [Изучить нейминг-паттерны _(и не только)_](../fail/patterns.mdx)
+3. [Изучить нейминг-паттерны _(и не только)_](./patterns.mdx)
