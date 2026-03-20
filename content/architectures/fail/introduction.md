@@ -11,7 +11,7 @@ FAiL была вдохновлена [Feature-Sliced Design (FSD)](https://featu
 
 ## Проект | Термины [#terminology]
 
-{/* prettier-ignore */}
+<!-- prettier-ignore -->
 > [!NOTE]
 >
 > Вам может пригодится
