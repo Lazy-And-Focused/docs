@@ -111,7 +111,11 @@ sidebarTitle: Главное
 9.  <span id="code-9" /> **Желательно** не опускать фигурные скобки.
     [Поясните!](#exp-7_9)
 10. **Желательно** иметь маленький уровень табуляции (идентации).
-11. Уровень табуляции зависит от проекта. Стандартный уровень табуляции в команде: **2 пробела**.
+11. Уровень табуляции зависит от проекта. Стандартный уровень табуляции в команде: **2 пробела**. 
+
+### 12. TypeScript [#typescript]
+
+1. <span id="code-12-1" /> **Желательно** использовать `const enum`, и не использовать `enum` [Что?](#exp-7_12_1)
 
 ## 8. Компиляция [#compilation]
 
@@ -167,7 +171,7 @@ sidebarTitle: Главное
   И мета-чисел: 23, 42, 47, 69, 666, 0815, 1337, 4711\.  
   Также допускается сокращения до одной буквы, когда используются методы массивов/объектов/…, например:
 
-  ```js
+  ```ts
   const numbers = [1, 2, 3, 4, 5, 6];
   const otherNumber = numbers.map((n) => n * 2);
   ```
@@ -181,7 +185,7 @@ sidebarTitle: Главное
 
 - <span id="exp-4_6" /> 4.6.
 
-  ```js
+  ```ts
   // Так нельзя
   class ExampleClass {
     hello = () => {
@@ -191,7 +195,7 @@ sidebarTitle: Главное
 
   // Так можно
   class ExampleClass {
-    hello() {
+    public hello() {
       console.log();
     }
   }
@@ -201,7 +205,7 @@ sidebarTitle: Главное
 
 - <span id="exp-6_1" /> 6.1.
 
-  ```js
+  ```ts
   export import("some-path");
   ```
 
@@ -209,7 +213,7 @@ sidebarTitle: Главное
 
 - <span id="exp-6_2" /> 6.2.
 
-  ```js
+  ```ts
   import type { SomeClass, SomeType, SomeInterface } from "path-to";
 
   // SomeType и SomeInteraface всегда импортируются, как типы
@@ -220,7 +224,7 @@ sidebarTitle: Главное
 
 - <span id="exp-6_7" /> 6.7.
 
-  ```js
+  ```ts
   import "dotenv/config"; // init-импорт, который обязательно должен быть в начале
 
   import type {
@@ -243,7 +247,7 @@ sidebarTitle: Главное
 - <span id="exp-7_5" /> 7.5. “Использовать пояснительные переменные” — Объявлять
   переменные, когда записываешь условие или результат функции.
 
-  ```js
+  ```ts
   const transferAllowed =
     hasSufficientBalance(account.balance, transfer.amount) &&
     account.isActive();
@@ -260,7 +264,7 @@ sidebarTitle: Главное
 - <span id="exp-7_9" /> 7.9. “Желательно не опускать фигурные скобки” — см.
   снимок экрана.
 
-  ```js
+  ```ts
   // Без опускания фигурных скобок
   if (transferAllowed) {
     console.log("Transfer successful.");
@@ -275,6 +279,80 @@ sidebarTitle: Главное
 
   При этом допускается опускание скобок, если сразу после идёт возврат функции или вброс ошибки (заканчивание логики).
   [Хорошо!](#code-9)
+
+- <span id="exp-7_12_1" /> 7.12.1  “Нельзя использовать обычные `enum`”
+
+Входной файл:
+```ts
+enum Directions {
+  Up,
+  Right,
+  Down,
+  Left
+}
+```
+
+Выходной файл:
+```js
+// .js
+"use strict";
+var Directions;
+(function (Directions) {
+  Directions[Directions["Up"] = 0] = "Up";
+  Directions[Directions["Right"] = 1] = "Right";
+  Directions[Directions["Down"] = 2] = "Down";
+  Directions[Directions["Left"] = 3] = "Left";
+})(Directions || (Directions = {}));
+```
+И
+```ts
+// .d.ts
+declare enum Directions {
+  Up = 0,
+  Right = 1,
+  Down = 2,
+  Left = 3
+}
+```
+
+В итоге лучше использовать `const enum`
+
+Входной файл:
+```ts
+const enum Directions {
+  Up,
+  Right,
+  Down,
+  Left
+};
+
+console.log(Directions.Up);
+console.log(Directions.Right);
+console.log(Directions.Down);
+console.log(Directions.Left);
+```
+
+Выходной файл:
+```js
+// .js
+"use strict";
+;
+console.log(0 /* Directions.Up */);
+console.log(1 /* Directions.Right */);
+console.log(2 /* Directions.Down */);
+console.log(3 /* Directions.Left */);
+```
+И
+```ts
+// .d.ts
+declare const enum Directions {
+  Up = 0,
+  Right = 1,
+  Down = 2,
+  Left = 3
+}
+```
+[я умный кот](#code-12-1)
 
 ## Источники вдохновения [#inspirations]
 
