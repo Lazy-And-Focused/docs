@@ -7,7 +7,6 @@ sidebarTitle: Введение
 ## Принципы от FSD [#fsd-principies]
 
 FAiL была вдохновлена [Feature-Sliced Design (FSD)](https://feature-sliced.github.io/documentation/ru/docs/get-started/overview).
-Обязательно взгляните — лишним не будет!
 
 ## Проект | Термины [#terminology]
 

@@ -23,7 +23,7 @@
 
 Название: `-{prefix} {content}`.
 
-{/* prettier-ignore --> */}
+<!-- prettier-ignore -->
 > [!WARNING]
 >
 > Если вы спонсируете LAF или если вы наш тимлид/гид
