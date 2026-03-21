@@ -1,38 +1,127 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c56c7ecf-fb47-4fb2-99a4-f43a9622b31e/deploy-status)](https://app.netlify.com/projects/laf-docs/deploys)
+# LAF/Documentation
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Документация команды **Lazy And Focused** — это централизованный источник информации о соглашениях, архитектурах и процессах разработки. Проект построен на основе [Nextra](https://nextra.site/) и [Next.js](https://nextjs.org/).
 
-## Getting Started
+---
 
-First, run the development server:
+## 📖 О проекте
+
+Данный репозиторий содержит:
+
+- Соглашения по коду и процессам (коммиты, ветки, пул‑реквесты)
+- Архитектурные решения (например, FAiL — Frontend Architecture in LAF, или же [BAD Архитектура](https://github.com/Lazy-And-Focused/BAD-Architecture) — Backend After Drinking)
+- Книги и полезные материалы для команды
+- Руководства по работе с проектами
+
+Документация доступна онлайн по адресу: [https://docs.laf-team.ru](https://docs.laf-team.ru)
+
+---
+
+## 🚀 Быстрый старт
+
+### Требования
+
+- Node.js 18.17 или выше
+- [pnpm](https://pnpm.io/) (рекомендованный менеджер пакетов)
+
+### Установка и запуск
+
+1. Клонируйте репозиторий:
+
+   ```bash
+   git clone https://github.com/Lazy-And-Focused/docs.git
+   cd docs
+   ```
+
+2. Установите зависимости:
+
+   ```bash
+   pnpm install
+   ```
+
+3. Запустите сервер разработки:
+
+   ```bash
+   pnpm dev
+   ```
+
+   Документация станет доступна по адресу [http://localhost:3000](http://localhost:3000).
+
+### Сборка для продакшена
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm build
+pnpm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🗂 Ключевые директории
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `app/` — Next.js App Router (глобальные настройки, layout, страницы)
+- `content/` — основное содержимое документации (MDX-файлы, _meta.ts)
+- `public/` — статические файлы (изображения, favicon и т.д.)
+- Корневые файлы: `package.json`, `README.md`, `next.config.ts`, `tsconfig.json` и др.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📝 Добавление и редактирование документации
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Создание новой страницы
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Определите, в какую категорию (раздел) попадает страница.
+2. Создайте `.md` или `.mdx` файл в соответствующей папке.
+3. При необходимости укажите frontmatter:
+   ```markdown
+   ---
+   title: Заголовок страницы
+   sidebarTitle: Название в сайдбаре
+   ---
+   ```
+4. Добавьте ссылку на страницу в `_meta.ts` родительской папки, чтобы изменить [её параметры отображения](https://nextra.site/docs/file-conventions/meta-file).
 
-## Deploy on Vercel
+### Редактирование существующей страницы
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Любые изменения можно вносить прямо в файлы.
+- Для тестирования используйте `pnpm dev`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Стили и форматирование
+
+- Для форматирования кода используйте стандартные блоки Markdown (`` ` `` или ` ``` ` с указанием языка).
+- Придерживайтесь правил, описанных в разделе [Соглашения / Документация](content/agreements/documentation.mdx).
+
+---
+
+## 🤝 Вклад в проект
+
+Мы приветствуем любой вклад! Если вы хотите исправить ошибку, дополнить информацию или предложить улучшение, следуйте этому процессу:
+
+1. Форкните репозиторий.
+2. Создайте ветку с именем, соответствующим [соглашению о ветках](content/agreements/commits-and-branches.mdx).
+3. Внесите изменения.
+4. Оформите коммиты по [правилам](content/agreements/commits-and-branches.mdx).
+5. Создайте пул‑реквест, указав в описании ссылку на issue (если есть) и описание изменений.
+
+Перед отправкой PR убедитесь, что:
+
+- Документация прошла локальную проверку (`pnpm build`).
+- Все изменения соответствуют [общим соглашениям](content/agreements/general.mdx).
+
+---
+
+## 📄 Лицензия
+
+Весь контент и код в этом репозитории распространяются под лицензией [MIT](LICENSE).
+
+---
+
+## 🙌 Благодарности
+
+- [Nextra](https://nextra.site/) — за отличную платформу для документации
+- [Next.js](https://nextjs.org/) — за мощный React‑фреймворк
+- Команда Lazy And Focused — за энтузиазм и вклад в развитие
+
+---
+
+**С уважением,**
+команда Lazy And Focused
