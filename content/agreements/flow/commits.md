@@ -56,3 +56,18 @@
   - `-up fail: add correct example`
 - ВАЛЯ, ВИДИШЬ ТОЧКА С ЗАПЯТОЙ:
   - `-up users router: users/ -> users/:id; -add PATCH /:id/follow; -fix`
+
+## Ветки:
+
+- `{name}` — название ветки
+- `{task}` — выполняемое задание
+- `{issue}` — номер решаемого issue
+- Пробелы: `-`
+
+Название ветки:
+- `{name}--{task}`
+- `issue-{issue}/{name}--{task}`
+
+Пример:
+- `main/code-review`
+- `issue-4/frontend--style-refactroring`

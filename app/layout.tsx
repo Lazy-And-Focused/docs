@@ -3,12 +3,21 @@ import { Banner, Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
 
+const DOCS_REPOSITORY_HOMEPAGE = "https://github.com/Lazy-And-Focused/docs";
+const DOCS_REPOSITORY_BASE =
+  "https://github.com/Lazy-And-Focused/docs/tree/main";
+
 const banner = (
   <Banner storageKey="warn-docs-in-dev-06-08-2025">
     ⚠ Документация в разработке
   </Banner>
 );
-const navbar = <Navbar logo={<b>LAF/Documentation</b>} />;
+const navbar = (
+  <Navbar
+    logo={<b>LAF/Documentation</b>}
+    projectLink={DOCS_REPOSITORY_HOMEPAGE}
+  />
+);
 const footer = (
   <Footer>2025-{new Date().getFullYear()} © Lazy And Focused</Footer>
 );
@@ -32,7 +41,7 @@ export default async function RootLayout({
           navbar={navbar}
           pageMap={await getPageMap()}
           footer={footer}
-          docsRepositoryBase="https://github.com/Lazy-And-Focused/docs/tree/main"
+          docsRepositoryBase={DOCS_REPOSITORY_BASE}
         >
           {children}
         </Layout>
