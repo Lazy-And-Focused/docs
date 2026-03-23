@@ -123,5 +123,4 @@ pnpm start
 
 ---
 
-**С уважением,**
-команда Lazy And Focused
+From LAF with love
