@@ -125,7 +125,7 @@ sidebarTitle: Главное
 
 ## Пояснения [#explanations]
 
-{/* prettier-ignore --> */}
+<!-- prettier-ignore -->
 
 > [!CAUTION]
 >
