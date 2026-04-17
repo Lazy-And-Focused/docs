@@ -127,7 +127,7 @@ sidebarTitle: Главное
 
 ## Пояснения [#explanations]
 
-{/* prettier-ignore --> */}
+<!-- prettier-ignore -->
 
 > [!CAUTION]
 >
@@ -277,7 +277,7 @@ sidebarTitle: Главное
   ```ts
   // Так нельзя
   class ExampleClass {
-    hello = () => {
+    public hello = () => {
       console.log();
     }
   }
@@ -295,7 +295,7 @@ sidebarTitle: Главное
 - <span id="exp-6_1" /> 6.1.
 
   ```ts
-  export import("some-path");
+  export import("some-module-or-path");
   ```
 
   [Всё понятно!](#import-and-export-1)
@@ -303,7 +303,8 @@ sidebarTitle: Главное
 - <span id="exp-6_2" /> 6.2.
 
   ```ts
-  import type { SomeClass, SomeType, SomeInterface } from "path-to";
+  import type { SomeType, SomeInterface } from "@/classes/somes/types";
+  import type { SomeClass } from "@/classes/somes";
 
   // SomeType и SomeInteraface всегда импортируются, как типы
   // SomeClass только в том случае, если он используется, как тип
@@ -319,16 +320,16 @@ sidebarTitle: Главное
   import type {
     SomeType,
     SomeInteraface
-  } from "path-to";
+  } from "@/classes/somes/types";
 
   import {
     SomeClass,
     SOME_CONTENT
-  } from "path2";
+  } from "@/classes/somes";
 
-  import package from "package.json";
+  import package from "../package.json";
 
-  import "style.css";
+  import "@styles/main.css";
   ```
 
   [АААААААААААААА](#import-and-export-7)
