@@ -4,23 +4,24 @@ sidebarTitle: Паттерны
 
 # Паттерны проектирования в FAiL
 
-{/* prettier-ignore */}
-> [!CAUTION]
->
-> Эта страница проектируется, пишется и обсуждается. Если есть
-> предложения, то не стесняйтесь создавать issue или писать
-> [в чат Telegram](https://t.me/laf_disccussion).
+В Fail есть строгая система, по которой вам следует именовать файлы и директории. Они могут различаться от требований фреймворка или рабочего процесса.
 
-Раздел посвящён неймингу и паттернам, которые Вы должны соблюдать в
-рамках кода для Frontend-части приложения.
+Рассмотрим родной для Fail вариант, когда мы разрабатываем приложение под Next.js.
 
-## Нейминг файлов [#files-naming]
+## Именование файлов [#files-naming]
 
-Для именования файлов используется `kebab-case`:
+Для всех расширений и типов файлов, включая папки, используется именование файлов в стиле `kebab-case`:
 
 - `example-page/page.tsx`
 - `form-login.tsx`
 - `users-config.ts`
+
+## Именование директорий [#folders-naming]
+
+Для папок, как расписано ранее, используется `kebab-case`, но также используем `pascal_case` для обозначения переменных:
+
+- `dashboard/top-users/[group_id]/[page_idx]`
+- `(landing)/team-skills/[member_id]`
 
 ## Переменные и константы [#vars-and-const]
 
@@ -41,8 +42,11 @@ const MY_COOL_CONSTANT_BABY = "yeah!";
 const API_BACKEND = "https://example.com/api";
 
 // Переменные
-const isAdmin = false;
-let name = "Failtin"; // каламбур намбер ван
+const isAdmin = false; // "Является ли... {существительное}"
+                       //   (обозначение роли пользователя)
+const logined = true;  // "Является ли... {прилагательное, глагол}"
+                       //   (обозначение выполненого действия)
+let name = "Failtin";  // каламбур намбер ван
 
 export default function ExampleCatPage({
   params: { id },

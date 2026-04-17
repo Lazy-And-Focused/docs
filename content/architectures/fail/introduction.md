@@ -4,7 +4,14 @@ sidebarTitle: Введение
 
 # Введение в архитектуру
 
+![Обложка статьи с заголовком "FAiL Documentation"](/assets/content/architectures/FAiL-cover.png)
+
 ## Принципы от FSD [#fsd-principies]
+
+<!-- prettier-ignore -->
+> [!CAUTION]
+>
+> **ЭТО НЕ** СПРАВОЧНИК ПО FSD. У FAiL и FSD свои подходы к разделению контента и управлению им в большой кодовой базе. Пока FAiL что-то разрешает, в FSD это является строгой ошибкой. И это следует понимать.
 
 FAiL была вдохновлена [Feature-Sliced Design (FSD)](https://feature-sliced.github.io/documentation/ru/docs/get-started/overview).
 Обязательно взгляните — лишним не будет!
