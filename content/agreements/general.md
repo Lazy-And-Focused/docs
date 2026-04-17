@@ -32,8 +32,10 @@ sidebarTitle: Главное
 4.  Наименование **не должно** содержать артиклей.
 5.  Наименование **не должно** содержать дезинформации.
 6.  <span id="naming-6" /> **Желательно** избегать сокращений, исключение
-    составляет общепринятая нотация, например: `i`, `j`, `k` в циклах, **но**
-    даже их лучше писать полностью при возможности. [Поясните!](#exp-1_6)
+    составляет общепринятая нотация, например: `i`, `j`, `k` в циклах, а также
+    однобуквенные переменные в коротких операциях. **Но** даже их лучше писать
+    полностью при возможности — особенно если логика занимает больше 3 строк.
+    [Поясните!](#exp-1_6)
 7.  **Желательно** использовать удобно произносимые наименования.
 8.  **Нежелательно** добавлять избыточный контекст в наименования.
 9.  **Обязательно** именовать классы, типы и интерфейсы в `UpperCamelCase`.
@@ -133,39 +135,102 @@ sidebarTitle: Главное
 
 <span id="exp-1_6"></span>
 
-- 1.6. “Желательно избегать сокращений, исключение
-  составляет общепринятая нотация…” — Все допустимые сокращения:
+- 1.6. “Желательно избегать сокращений, исключения
+  составляет общепринятая нотация…” — Примеры допустимых сокращений:
   - add — addition.
   - app — application.
+  - arg — argument.
   - arr — array.
   - asc — ascending.
+  - async — asynchronous.
+  - attr — attribute.
   - auth — authentication.
+  - bin — binary.
   - bool — boolean.
-  - cfg/config — configuration.
+  - buf — buffer.
+  - calc — calculation.
+  - cb — callback.
+  - cfg — configuration.
   - char — character.
+  - cmd — command.
+  - cnt — count.
+  - col — column.
+  - comp — component.
   - const — constant.
+  - curr — current.
+  - ctx — context.
+  - db — database.
+  - def — definition.
+  - del — delete.
+  - dep — dependency.
   - desc — descending.
   - dev — development.
+  - diff — difference.
   - dir — directory.
+  - dist — distribution.
+  - doc — document.
+  - elem — element.
+  - enc — encoding.
   - env — environment.
-  - func — function.
+  - err — error.
+  - ev — event.
+  - ex — exception.
+  - exec — execute.
+  - ext — extension.
+  - fmt — format.
+  - fn — function.
+  - gen — generate.
   - id — identifier.
+  - idx — index.
   - img — image.
+  - impl — implementation.
+  - info — information.
   - init — initialize.
   - int — integer.
+  - len — length.
+  - lib — library.
   - max — maximum.
+  - mem — memory.
+  - meta — metadata.
   - min — minimum.
+  - mod — module.
   - msg — message.
   - nav — navigation.
   - num — number.
   - obj — object.
+  - opt — option.
+  - orig — original.
+  - params — parameters.
+  - perm — permission.
+  - prev — previous.
+  - prod — production.
+  - props — properties.
+  - proto — protocol.
+  - ptr — pointer.
+  - pub — public.
+  - ref — reference.
+  - reg — register.
+  - rel — relative.
   - req — request.
   - res — response.
-  - rm/rem — remove.
+  - rm — remove.
+  - sep — separator.
+  - seq — sequence.
+  - spec — specification.
   - src — source.
+  - stat — status.
+  - str — string.
+  - sub — substitute.
+  - sum — summary.
+  - sync — synchronous.
   - temp — temporary.
   - up — update.
+  - url — uniform resource locator.
+  - usr — user.
+  - val — value.
   - var — variable.
+  - ver — version.
+  - vol — volume.
 
   Также допускается использование метапеременных из математики: a, b, c, d, e, f; x, y, z, w; i, j, k.  
   И мета-чисел: 23, 42, 47, 69, 666, 0815, 1337, 4711\.  
@@ -176,7 +241,31 @@ sidebarTitle: Главное
   const otherNumber = numbers.map((n) => n * 2);
   ```
 
-  Но только тогда и только тогда, когда переменная понятна из контекста и код не выглядит большим и громовским.
+  Сокращения и общепринятые нотации разрешено использовать **только при одновременном соблюдении всех условий**:
+  1.  Переменная абсолютно понятна из непосредственного контекста
+  2.  Вся логика с использованием этого сокращения занимает не более трёх строк кода
+  3.  Код остаётся читаемым без дополнительных пояснений
+
+  Сокращения **нельзя использовать**, если хотя бы одно из условий не выполняется, а также в случаях когда внутри блока присутствует вложенная логика, ветвления или вызовы больше одной функции.
+
+  Примеры правильного использования:
+  ```ts
+  // ✅ "i" - общепринятая нотация для цикла
+  function maximizeWindows(windowsIds: string[]) {
+      for (let i = 0; i < windowsIds.length; i++) {
+          maximizeWindow(windowsIds[i])
+      }
+  }
+
+  interface Window { id: string; title: string; }
+
+  // ✅ "w" абсолютно понятно из контекста, всего одна строка
+  function printWindows(windows: Window[]) {
+    windows.forEach(w => print(`${w.id}: ${w.title}`))
+  }
+  ```
+
+  При этом если логика внутри становится сложнее, больше одной-двух строк — сразу пиши полное название переменной. Читаемость всегда важнее экономии нескольких символов.
   [Давай обратно!](#naming-6)
 
 - <span id="exp-3_2" /> 3.2. “Каждая линия функции должна быть на одинаковом
