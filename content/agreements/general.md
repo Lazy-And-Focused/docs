@@ -7,6 +7,7 @@ sidebarTitle: Главное
 
 > “Лень подчинила себе процессы, пока мы фокусировались на обязанностях”  
 > _— Valentin Bird \~ придумано за минуту._
+>
 > “Код, придерживающийся единой концепции и стиля, — элегантный”  
 > _— FOCKUSTY \~ красота всему голова._
 
@@ -22,81 +23,88 @@ sidebarTitle: Главное
 - [8. Компиляция](#compilation)
 - [Источники вдохновения](#inspirations)
 
-Правила “простого кода” по Роберту Мартину:
+---
 
+**Приложение:**
+
+<details>
+    <summary>Правила “простого кода” по Роберту Мартину</summary>
+
+Код:
 - Проходит все тесты
 - Не содержит дубликатов
 - Выражает все концепции системы
 - Не содержит лишних сущностей.
+</details>
 
 ## 1. Наименование [#naming]
 
 1. Использовать определенную нотацию в соответствии с языком программирования.
-    1. `JSON` — `camelCase`.
-    2. `Database` — `snake_case`.
+   1. `JSON` — `camelCase`.
+   2. `Database` — `snake_case`.
 2. Использовать в названиях аббревиатуры как одно слово.
-    1. `camelCase` — `getApiUrl`.
-    2. `snake_case` — `get_api_url`.
-    3. `kebab-case` — `get-api-url`.
-    4. И их аналоги (`UpperCamelCase`, `SCREAMING_SNAKE_CASE`, `camel-Kebab-Case` и др).
+   1. `camelCase` — `getApiUrl`.
+   2. `snake_case` — `get_api_url`.
+   3. `kebab-case` — `get-api-url`.
+   4. И их аналоги (`UpperCamelCase`, `SCREAMING_SNAKE_CASE`, `camel-Kebab-Case` и др).
 3. Наименование **должно** отражать то, что оно делает.
 4. Наименование **не должно** содержать артиклей.
 5. Наименование **не должно** содержать дезинформации.
 6. **Желательно** избегать сокращений, исключение
-    составляет общепринятая нотация, например: `i`, `j`, `k` в циклах, **но**
-    даже их лучше писать полностью при возможности.
+   составляет общепринятая нотация, например: `i`, `j`, `k` в циклах, **но**
+   даже их лучше писать полностью при возможности.
 
-    <details>
-    <summary>Пояснение</summary>
+   <details>
+   <summary>Пояснение</summary>
 
-    > [!CAUTION]
-    >
-    > Если используете сокращения, то используйте их во всём коде одинаково.
+   > [!CAUTION]
+   >
+   > Если используете сокращения, то используйте их во всём коде одинаково.
 
-    Все допустимые сокращения:
-    - add — addition.
-    - app — application.
-    - arr — array.
-    - asc — ascending.
-    - auth — authentication.
-    - bool — boolean.
-    - cfg/config — configuration.
-    - char — character.
-    - const — constant.
-    - desc — descending.
-    - dev — development.
-    - dir — directory.
-    - env — environment.
-    - func — function.
-    - id — identifier.
-    - img — image.
-    - init — initialize.
-    - int — integer.
-    - max — maximum.
-    - min — minimum.
-    - msg — message.
-    - nav — navigation.
-    - num — number.
-    - obj — object.
-    - req — request.
-    - res — response.
-    - rm/rem — remove.
-    - src — source.
-    - temp — temporary.
-    - up — update.
-    - var — variable.
+   Все допустимые сокращения:
+   - add — addition.
+   - app — application.
+   - arr — array.
+   - asc — ascending.
+   - auth — authentication.
+   - bool — boolean.
+   - cfg/config — configuration.
+   - char — character.
+   - const — constant.
+   - desc — descending.
+   - dev — development.
+   - dir — directory.
+   - env — environment.
+   - func — function.
+   - id — identifier.
+   - img — image.
+   - init — initialize.
+   - int — integer.
+   - max — maximum.
+   - min — minimum.
+   - msg — message.
+   - nav — navigation.
+   - num — number.
+   - obj — object.
+   - req — request.
+   - res — response.
+   - rm/rem — remove.
+   - src — source.
+   - temp — temporary.
+   - up — update.
+   - var — variable.
 
-    Также допускается использование метапеременных из математики: a, b, c, d, e, f; x, y, z, w; i, j, k.  
-    И мета-чисел: 23, 42, 47, 69, 666, 0815, 1337, 4711.  
-    Также допускается сокращения до одной буквы, когда используются методы массивов/объектов/…, например:
+   Также допускается использование метапеременных из математики: a, b, c, d, e, f; x, y, z, w; i, j, k.  
+   И мета-чисел: 23, 42, 47, 69, 666, 0815, 1337, 4711.  
+   Также допускается сокращения до одной буквы, когда используются методы массивов/объектов/…, например:
 
-    ```ts
-    const numbers = [1, 2, 3, 4, 5, 6];
-    const otherNumber = numbers.map((n) => n * 2);
-    ```
+   ```ts
+   const numbers = [1, 2, 3, 4, 5, 6];
+   const otherNumber = numbers.map((n) => n * 2);
+   ```
 
-    Но только тогда и только тогда, когда переменная понятна из контекста и код не выглядит большим и громоздким.
-    </details>
+   Но только тогда и только тогда, когда переменная понятна из контекста и код не выглядит большим и громоздким.
+   </details>
 
 7. **Желательно** использовать удобно произносимые наименования.
 8. **Нежелательно** добавлять избыточный контекст в наименования.
@@ -114,13 +122,13 @@ sidebarTitle: Главное
 
 1. Имя функции **должно** содержать глагольную часть.
 2. Каждая линия функции **должна** быть на
-    одинаковом уровне абстракции.
+   одинаковом уровне абстракции.
 
-    <details>
-    <summary>Пояснение</summary>
+   <details>
+   <summary>Пояснение</summary>
 
-    Каждая часть функции должна, как и функция, выполнять работу над действием функции.
-    </details>
+   Каждая часть функции должна, как и функция, выполнять работу над действием функции.
+   </details>
 
 3. Функция **должна** делать только одно действие.
 4. Функция **должна** принимать не более трёх аргументов.
@@ -144,26 +152,26 @@ sidebarTitle: Главное
 5. **Обязательно** использовать единый стиль исполняющего метода, в зависимости от проекта. По умолчанию: `execute`. Возможные варианты: `execute`, `run`, `initialize` (`init`).
 6. Методы класса **не должны** быть объявлены через лямбда-синтаксис.
 
-    <details>
-    <summary>Пояснение</summary>
+   <details>
+   <summary>Пояснение</summary>
 
-    ```ts
-    // Так нельзя
-    class ExampleClass {
-      public hello = () => {
-        console.log();
-      }
-    }
+   ```ts
+   // Так нельзя
+   class ExampleClass {
+     public hello = () => {
+       console.log();
+     };
+   }
 
-    // Так можно
-    class ExampleClass {
-      public hello() {
-        console.log();
-      }
-    }
-    ```
+   // Так можно
+   class ExampleClass {
+     public hello() {
+       console.log();
+     }
+   }
+   ```
 
-    </details>
+   </details>
 
 ## 5. Циклы [#loops]
 
@@ -173,29 +181,29 @@ sidebarTitle: Главное
 
 1. **Нельзя** импортировать и экспортировать одновременно.
 
-    <details>
-    <summary>Пояснение</summary>
+   <details>
+   <summary>Пояснение</summary>
 
-    ```ts
-    export import("some-module-or-path");
-    ```
+   ```ts
+   export import("some-module-or-path");
+   ```
 
-    </details>
+   </details>
 
 2. Импортировать типы/абстракцию как типы.
 
-    <details>
-    <summary>Пояснение</summary>
+   <details>
+   <summary>Пояснение</summary>
 
-    ```ts
-    import type { SomeType, SomeInterface } from "@/classes/somes/types";
-    import type { SomeClass } from "@/classes/somes";
+   ```ts
+   import type { SomeType, SomeInterface } from "@/classes/somes/types";
+   import type { SomeClass } from "@/classes/somes";
 
-    // SomeType и SomeInteraface всегда импортируются, как типы
-    // SomeClass только в том случае, если он используется, как тип
-    ```
+   // SomeType и SomeInteraface всегда импортируются, как типы
+   // SomeClass только в том случае, если он используется, как тип
+   ```
 
-    </details>
+   </details>
 
 3. Всегда экспортировать дефолтный экспорт вместе с недефолтным (имеются исключения из-за фреймворков).
 4. Всегда выносить импорт типов.
@@ -210,23 +218,17 @@ sidebarTitle: Главное
     <details>
     <summary>Пояснение</summary>
 
-    ```ts
-    import "dotenv/config"; // init-импорт, который обязательно должен быть в начале
+   ```ts
+   import "dotenv/config"; // init-импорт, который обязательно должен быть в начале
 
-    import type {
-      SomeType,
-      SomeInteraface
-    } from "@/classes/somes/types";
+   import type { SomeType, SomeInteraface } from "@/classes/somes/types";
 
-    import {
-      SomeClass,
-      SOME_CONTENT
-    } from "@/classes/somes";
+   import { SomeClass, SOME_CONTENT } from "@/classes/somes";
 
-    import package from "../package.json";
+   import package from "../package.json";
 
-    import "@styles/main.css";
-    ```
+   import "@styles/main.css";
+   ```
 
     </details>
 
@@ -240,48 +242,48 @@ sidebarTitle: Главное
 4. Снижайте уровень вложенности кода.
 5. Используйте пояснительные переменные.
 
-    <details>
-    <summary>Пояснение</summary>
+   <details>
+   <summary>Пояснение</summary>
 
-    Объявляйте переменные, когда записываете условие или результат функции.
+   Объявляйте переменные, когда записываете условие или результат функции.
 
-    ```ts
-    const transferAllowed =
-      hasSufficientBalance(account.balance, transfer.amount) &&
-      account.isActive();
+   ```ts
+   const transferAllowed =
+     hasSufficientBalance(account.balance, transfer.amount) &&
+     account.isActive();
 
-    if (transferAllowed) {
-      console.log("Transfer successful.");
-    } else {
-      throw new Error("Transfer can not be completed.");
-    }
-    ```
+   if (transferAllowed) {
+     console.log("Transfer successful.");
+   } else {
+     throw new Error("Transfer can not be completed.");
+   }
+   ```
 
-    </details>
+   </details>
 
 6. Код **не должен** содержать лишние комментарии (Разрешается писать документацию через **специальные** комментарии).
 7. Код **не должен** содержать закомментированный код.
 8. Код **не должен** содержать магических чисел, строк…
 9. **Желательно** не опускать фигурные скобки.
 
-    <details>
-    <summary>Пояснение</summary>
+   <details>
+   <summary>Пояснение</summary>
 
-    ```ts
-    // Без опускания фигурных скобок
-    if (transferAllowed) {
-      console.log("Transfer successful.");
-    } else {
-      throw new Error("Transfer can not be completed.");
-    }
+   ```ts
+   // Без опускания фигурных скобок
+   if (transferAllowed) {
+     console.log("Transfer successful.");
+   } else {
+     throw new Error("Transfer can not be completed.");
+   }
 
-    // С опусканием фигурных скобок
-    if (transferAllowed) console.log("Transfer successful.");
-    else throw new Error("Transfer can not be completed.");
-    ```
+   // С опусканием фигурных скобок
+   if (transferAllowed) console.log("Transfer successful.");
+   else throw new Error("Transfer can not be completed.");
+   ```
 
-    При этом допускается опускание скобок, если сразу после идёт возврат функции или вброс ошибки (заканчивание логики).
-    </details>
+   При этом допускается опускание скобок, если сразу после идёт возврат функции или вброс ошибки (заканчивание логики).
+   </details>
 
 10. **Желательно** иметь маленький уровень табуляции (индентации).
 11. Уровень табуляции зависит от проекта. Стандартный уровень табуляции в команде: **2 пробела**.
@@ -297,7 +299,7 @@ sidebarTitle: Главное
       Up,
       Right,
       Down,
-      Left
+      Left,
     }
     ```
 
@@ -308,10 +310,10 @@ sidebarTitle: Главное
     "use strict";
     var Directions;
     (function (Directions) {
-      Directions[Directions["Up"] = 0] = "Up";
-      Directions[Directions["Right"] = 1] = "Right";
-      Directions[Directions["Down"] = 2] = "Down";
-      Directions[Directions["Left"] = 3] = "Left";
+      Directions[(Directions["Up"] = 0)] = "Up";
+      Directions[(Directions["Right"] = 1)] = "Right";
+      Directions[(Directions["Down"] = 2)] = "Down";
+      Directions[(Directions["Left"] = 3)] = "Left";
     })(Directions || (Directions = {}));
     ```
 
@@ -323,7 +325,7 @@ sidebarTitle: Главное
       Up = 0,
       Right = 1,
       Down = 2,
-      Left = 3
+      Left = 3,
     }
     ```
 
@@ -336,8 +338,8 @@ sidebarTitle: Главное
       Up,
       Right,
       Down,
-      Left
-    };
+      Left,
+    }
 
     console.log(Directions.Up);
     console.log(Directions.Right);
@@ -350,7 +352,6 @@ sidebarTitle: Главное
     ```js
     // .js
     "use strict";
-    ;
     console.log(0 /* Directions.Up */);
     console.log(1 /* Directions.Right */);
     console.log(2 /* Directions.Down */);
@@ -365,7 +366,7 @@ sidebarTitle: Главное
       Up = 0,
       Right = 1,
       Down = 2,
-      Left = 3
+      Left = 3,
     }
     ```
 
