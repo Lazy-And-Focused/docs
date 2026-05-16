@@ -136,7 +136,7 @@ sidebarTitle: Главное
 <span id="exp-1_6"></span>
 
 - 1.6. “Желательно избегать сокращений, исключения
-  составляет общепринятая нотация…” — Примеры допустимых сокращений:
+  составляет общепринятая нотация…” — Примеры возможных сокращений:
   - add — addition.
   - app — application.
   - arg — argument.
@@ -160,7 +160,6 @@ sidebarTitle: Главное
   - curr — current.
   - ctx — context.
   - db — database.
-  - def — definition.
   - del — delete.
   - dep — dependency.
   - desc — descending.
@@ -174,7 +173,6 @@ sidebarTitle: Главное
   - env — environment.
   - err — error.
   - ev — event.
-  - ex — exception.
   - exec — execute.
   - ext — extension.
   - fmt — format.
@@ -199,15 +197,12 @@ sidebarTitle: Главное
   - num — number.
   - obj — object.
   - opt — option.
-  - orig — original.
   - params — parameters.
   - perm — permission.
   - prev — previous.
   - prod — production.
-  - props — properties.
+  - prop — property.
   - proto — protocol.
-  - ptr — pointer.
-  - pub — public.
   - ref — reference.
   - reg — register.
   - rel — relative.
@@ -215,18 +210,15 @@ sidebarTitle: Главное
   - res — response.
   - rm — remove.
   - sep — separator.
-  - seq — sequence.
   - spec — specification.
   - src — source.
   - stat — status.
   - str — string.
-  - sub — substitute.
   - sum — summary.
   - sync — synchronous.
   - temp — temporary.
   - up — update.
   - url — uniform resource locator.
-  - usr — user.
   - val — value.
   - var — variable.
   - ver — version.
